@@ -42,7 +42,7 @@ function allCards() {
                 left: idx * 75,
                 selected: false
             }
-            console.log(top)
+            // console.log(top)
             child.style.webkitTransform = `rotate(${j*5}deg)`
             child.style.MozTransform = `rotate(${j*5}deg)`
             child.style.msTransform = `rotate(${j*5}deg)`
