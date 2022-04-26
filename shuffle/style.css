@@ -1,6 +1,9 @@
 .card {
-    width: inherit;
-    height: inherit;
+    /* z-index: 0;
+    background-color: transparent; */
+
+    width: 200px;
+    height: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,18 +14,27 @@
     border-radius: 5px;
     box-shadow: 3px 3px 10px black;
     background-color: white;
-    transition: all 1s ease 0s;
+    /* transition: all 1s ease 0s; */
+    transition: height 1s ease 0s;
+    transition: width 1s ease 0s;
+    transition: z-index 400s ease 10s;
+    transition: transform 1s ease 0s;
 }
 
 .card-container {
+    /* border: 1px solid red;
+    background-color: red;
+    z-index: 3; */
+
     cursor: pointer;
     position: absolute;
-    height: 300px;
     width: 200px;
+    height: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: all 1s ease 0s;
+    /* transition: height width transforms 1s ease 0s; */
 }
 
 .card:hover {
