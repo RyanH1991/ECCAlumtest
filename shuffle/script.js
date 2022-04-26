@@ -56,21 +56,18 @@ function allCards() {
                     child.classList.remove('grow-card');
                     child.style.left = `${cards[idx].left}px`;
                     child.style.top = `${cards[idx].top}px`;
-                    // setTimeout(() => {
-                        // child.style.zIndex = 0;
-                        setTimeout(() => {
-                            child.style.webkitTransform = `rotate(${cards[idx].rotate}deg)`
-                            child.style.MozTransform = `rotate(${cards[idx].rotate}deg)`
-                            child.style.msTransform = `rotate(${cards[idx].rotate}deg)`
-                            child.style.OTransform = `rotate(${cards[idx].rotate}deg)`
-                            child.style.transform = `rotate(${cards[idx].rotate}deg)`
-                            child.childNodes[0].style.webkitTransform = 'none'
-                            child.childNodes[0].style.MozTransform = 'none'
-                            child.childNodes[0].style.msTransform = 'none'
-                            child.childNodes[0].style.OTransform = 'none'
-                            child.childNodes[0].style.transform = 'none'
-                            //consider putting back hover feature here
-                        // }, '250')
+                    setTimeout(() => {
+                        child.style.zIndex = '0'
+                        child.style.webkitTransform = `rotate(${cards[idx].rotate}deg)`
+                        child.style.MozTransform = `rotate(${cards[idx].rotate}deg)`
+                        child.style.msTransform = `rotate(${cards[idx].rotate}deg)`
+                        child.style.OTransform = `rotate(${cards[idx].rotate}deg)`
+                        child.style.transform = `rotate(${cards[idx].rotate}deg)`
+                        child.childNodes[0].style.webkitTransform = 'none'
+                        child.childNodes[0].style.MozTransform = 'none'
+                        child.childNodes[0].style.msTransform = 'none'
+                        child.childNodes[0].style.OTransform = 'none'
+                        child.childNodes[0].style.transform = 'none'
                     }, '1000')
                 } else {
                     cards[idx].selected = true;
@@ -88,7 +85,7 @@ function allCards() {
                         child.style.transform = `none`
                         child.style.top = '300px'
                         child.style.left = '500px'
-                        // child.style.zIndex = 1;
+                        child.style.zIndex = 1;
                     }, '1000');
                 }
             })

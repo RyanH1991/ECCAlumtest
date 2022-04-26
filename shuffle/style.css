@@ -15,9 +15,10 @@
     box-shadow: 3px 3px 10px black;
     background-color: white;
     /* transition: all 1s ease 0s; */
+    transition: top 1s ease 0s;
+    transition: left 1s ease 0s;
     transition: height 1s ease 0s;
     transition: width 1s ease 0s;
-    transition: z-index 400s ease 10s;
     transition: transform 1s ease 0s;
 }
 
@@ -34,7 +35,11 @@
     justify-content: center;
     align-items: center;
     transition: all 1s ease 0s;
-    /* transition: height width transforms 1s ease 0s; */
+    /* transition: top 1s ease 0s;
+    transition: left 1s ease 0s;
+    transition: height 1s ease 0s;
+    transition: width 1s ease 0s;
+    transition: transform 1s ease 0s; */
 }
 
 .card:hover {
@@ -49,7 +54,8 @@
 .grow-card {
     height: 600px;
     width: 400px;
-    z-index: 1;
+    /* transition: all 1s ease 0s; */
+    /* z-index: 1; */
 }
 
 .container {
