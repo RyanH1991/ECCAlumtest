@@ -67,6 +67,7 @@ function allCards() {
                         child.childNodes[0].style.msTransform = 'none'
                         child.childNodes[0].style.OTransform = 'none'
                         child.childNodes[0].style.transform = 'none'
+                        //consider putting back hover feature here
                     }, '1000')
                 } else {
                     cards[idx].selected = true;
