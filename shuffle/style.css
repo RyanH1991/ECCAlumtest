@@ -1,6 +1,6 @@
 .card {
-    /* z-index: 0;
-    background-color: transparent; */
+    z-index: 0;
+    /* background-color: transparent; */
 
     width: 200px;
     height: 300px;
@@ -55,7 +55,7 @@
     height: 600px;
     width: 400px;
     /* transition: all 1s ease 0s; */
-    /* z-index: 1; */
+    z-index: 1;
 }
 
 .container {

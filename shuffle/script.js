@@ -57,7 +57,7 @@ function allCards() {
                     child.style.left = `${cards[idx].left}px`;
                     child.style.top = `${cards[idx].top}px`;
                     setTimeout(() => {
-                        child.style.zIndex = '0'
+                        // child.style.zIndex = '0'
                         child.style.webkitTransform = `rotate(${cards[idx].rotate}deg)`
                         child.style.MozTransform = `rotate(${cards[idx].rotate}deg)`
                         child.style.msTransform = `rotate(${cards[idx].rotate}deg)`
@@ -85,7 +85,7 @@ function allCards() {
                         child.style.transform = `none`
                         child.style.top = '300px'
                         child.style.left = '500px'
-                        child.style.zIndex = 1;
+                        // child.style.zIndex = 1;
                     }, '1000');
                 }
             })
