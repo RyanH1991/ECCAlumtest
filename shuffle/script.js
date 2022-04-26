@@ -1,11 +1,13 @@
-//I want to be able to grab all of the images
-//and place them into their own card
-//display the images in their cards
-//just add an external div with the additional transform features
-//when the card is clicked I want to pull the card all the wat out,
-//then grow the card and bring it to the center of the screen
+//--I want to be able to grab all of the images
+//--and place them into their own card
+//--display the images in their cards
+//--just add an external div with the additional transform features
+//--when the card is clicked I want to pull the card all the wat out,
+//--then grow the card and bring it to the center of the screen
 //now lets work on the close feature
 //we should only be able to interact with one card at a time
+//put cards back
+//rearrange photo to make room for bio underneath
 
 
 //now on hover I want to change their Y index to show user they have been hovered on
