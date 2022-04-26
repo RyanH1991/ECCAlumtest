@@ -28,12 +28,20 @@ function allCards() {
         newCard.appendChild(newImg);
         container.appendChild(newCardContainer);
     }
+    let cards = {};
     let j = Math.floor((container.childNodes.length - 3) / -2);
     container.childNodes.forEach((child, idx, nodes) => {
         // console.log(j)
         // console.log(child)
         if (idx > 0) {
             let top = (3 * j * j) - (2 * j) + 10
+            cards[idx] = {
+                div: child,
+                rotate: j*5,
+                top: top,
+                left: idx * 75,
+                selected: false
+            }
             console.log(top)
             child.style.webkitTransform = `rotate(${j*5}deg)`
             child.style.MozTransform = `rotate(${j*5}deg)`
@@ -43,22 +51,41 @@ function allCards() {
             child.style.left = `${idx * 75}px`
             child.style.top = `${top}px`
             child.addEventListener('click', () => {
-                console.log(child.childNodes)
-                child.childNodes[0].style.webkitTransform = 'translateY(-310px)'
-                child.childNodes[0].style.MozTransform = 'translateY(-310px)'
-                child.childNodes[0].style.msTransform = 'translateY(-310px)'
-                child.childNodes[0].style.OTransform = 'translateY(-310px)'
-                child.childNodes[0].style.transform = 'translateY(-310px)'
-                setTimeout(() => {
-                    child.classList.add('grow-card');
-                    child.style.webkitTransform = `none`
-                    child.style.MozTransform = `none`
-                    child.style.msTransform = `none`
-                    child.style.OTransform = `none`
-                    child.style.transform = `none`
-                    child.style.top = '300px'
-                    child.style.left = '500px'
-                }, '1000');
+                if (cards[idx].selected) {
+                    cards[idx].selected = false;
+                    child.classList.remove('grow-card');
+                    child.style.webkitTransform = `rotate(${cards[idx].rotate}deg)`
+                    child.style.MozTransform = `rotate(${cards[idx].rotate}deg)`
+                    child.style.msTransform = `rotate(${cards[idx].rotate}deg)`
+                    child.style.OTransform = `rotate(${cards[idx].rotate}deg)`
+                    child.style.transform = `rotate(${cards[idx].rotate}deg)`
+                    child.style.left = `${cards[idx].left}px`;
+                    child.style.top = `${cards[idx].top}px`;
+                    setTimeout(() => {
+                        child.childNodes[0].style.webkitTransform = 'none'
+                        child.childNodes[0].style.MozTransform = 'none'
+                        child.childNodes[0].style.msTransform = 'none'
+                        child.childNodes[0].style.OTransform = 'none'
+                        child.childNodes[0].style.transform = 'none'
+                    }, '1000')
+                } else {
+                    cards[idx].selected = true;
+                    child.childNodes[0].style.webkitTransform = 'translateY(-310px)'
+                    child.childNodes[0].style.MozTransform = 'translateY(-310px)'
+                    child.childNodes[0].style.msTransform = 'translateY(-310px)'
+                    child.childNodes[0].style.OTransform = 'translateY(-310px)'
+                    child.childNodes[0].style.transform = 'translateY(-310px)'
+                    setTimeout(() => {
+                        child.classList.add('grow-card');
+                        child.style.webkitTransform = `none`
+                        child.style.MozTransform = `none`
+                        child.style.msTransform = `none`
+                        child.style.OTransform = `none`
+                        child.style.transform = `none`
+                        child.style.top = '300px'
+                        child.style.left = '500px'
+                    }, '1000');
+                }
             })
             j++;
         }
