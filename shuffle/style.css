@@ -15,8 +15,8 @@
     box-shadow: 3px 3px 10px black;
     background-color: white;
     /* transition: all 1s ease 0s; */
-    transition: top 1s ease 0s;
-    transition: left 1s ease 0s;
+    /* transition: top 1s ease 0s;
+    transition: left 1s ease 0s; */
     transition: height 1s ease 0s;
     transition: width 1s ease 0s;
     transition: transform 1s ease 0s;

@@ -60,16 +60,16 @@ function allCards() {
                         child.style.zIndex = '0'
                     }, '1000')
                     setTimeout(() => {
-                            child.style.webkitTransform = `rotate(${cards[idx].rotate}deg)`
-                            child.style.MozTransform = `rotate(${cards[idx].rotate}deg)`
-                            child.style.msTransform = `rotate(${cards[idx].rotate}deg)`
-                            child.style.OTransform = `rotate(${cards[idx].rotate}deg)`
-                            child.style.transform = `rotate(${cards[idx].rotate}deg)`
-                            child.childNodes[0].style.webkitTransform = 'none'
-                            child.childNodes[0].style.MozTransform = 'none'
-                            child.childNodes[0].style.msTransform = 'none'
-                            child.childNodes[0].style.OTransform = 'none'
-                            child.childNodes[0].style.transform = 'none'
+                        child.style.webkitTransform = `rotate(${cards[idx].rotate}deg)`
+                        child.style.MozTransform = `rotate(${cards[idx].rotate}deg)`
+                        child.style.msTransform = `rotate(${cards[idx].rotate}deg)`
+                        child.style.OTransform = `rotate(${cards[idx].rotate}deg)`
+                        child.style.transform = `rotate(${cards[idx].rotate}deg)`
+                        child.childNodes[0].style.webkitTransform = 'none'
+                        child.childNodes[0].style.MozTransform = 'none'
+                        child.childNodes[0].style.msTransform = 'none'
+                        child.childNodes[0].style.OTransform = 'none'
+                        child.childNodes[0].style.transform = 'none'
                     }, '1250')
                 } else {
                     cards[idx].selected = true;
@@ -79,6 +79,9 @@ function allCards() {
                     child.childNodes[0].style.OTransform = 'translateY(-330px)'
                     child.childNodes[0].style.transform = 'translateY(-330px)'
                     setTimeout(() => {
+                        child.style.zIndex = 1;
+                    }, '800')
+                    setTimeout(() => {
                         child.classList.add('grow-card');
                         child.style.webkitTransform = `none`
                         child.style.MozTransform = `none`
@@ -87,8 +90,7 @@ function allCards() {
                         child.style.transform = `none`
                         child.style.top = '300px'
                         child.style.left = '500px'
-                        child.style.zIndex = 1;
-                    }, '1000');
+                    }, '1200');
                 }
             })
             j++;
