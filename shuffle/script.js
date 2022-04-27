@@ -52,7 +52,7 @@ function allCards() {
             child.style.left = `${idx * 75}px`
             child.style.top = `${top}px`
             child.addEventListener('click', () => {
-                if (cards[idx].selected) {
+                if (cards[idx].selected) { //card is alreadt showcased
                     child.classList.remove('grow-card');
                     child.style.left = `${cards[idx].left}px`;
                     child.style.top = `${cards[idx].top}px`;
@@ -66,13 +66,14 @@ function allCards() {
                         child.style.msTransform = `rotate(${cards[idx].rotate}deg)`
                         child.style.OTransform = `rotate(${cards[idx].rotate}deg)`
                         child.style.transform = `rotate(${cards[idx].rotate}deg)`
-                        child.childNodes[0].style.webkitTransform = 'none'
-                        child.childNodes[0].style.MozTransform = 'none'
-                        child.childNodes[0].style.msTransform = 'none'
-                        child.childNodes[0].style.OTransform = 'none'
-                        child.childNodes[0].style.transform = 'none'
+                        child.childNodes[0].style.webkitTransform = 'translateY(0px)'
+                        child.childNodes[0].style.MozTransform = 'translateY(0px)'
+                        child.childNodes[0].style.msTransform = 'translateY(0px)'
+                        child.childNodes[0].style.OTransform = 'translateY(0px)'
+                        child.childNodes[0].style.transform = 'translateY(0px)'
                     }, '1250')
-                } else {
+                    child.addEventListener('mouseleave')
+                } else { //card is in hand
                     child.childNodes[0].style.webkitTransform = 'translateY(-330px)'
                     child.childNodes[0].style.MozTransform = 'translateY(-330px)'
                     child.childNodes[0].style.msTransform = 'translateY(-330px)'
@@ -84,16 +85,19 @@ function allCards() {
                     setTimeout(() => {
                         cards[idx].selected = true;
                         child.classList.add('grow-card');
-                        child.style.webkitTransform = `none`
-                        child.style.MozTransform = `none`
-                        child.style.msTransform = `none`
-                        child.style.OTransform = `none`
-                        child.style.transform = `none`
+                        child.style.webkitTransform = `rotate(0deg)`
+                        child.style.MozTransform = `rotate(0deg)`
+                        child.style.msTransform = `rotate(0deg)`
+                        child.style.OTransform = `rotate(0deg)`
+                        child.style.transform = `rotate(0deg)`
                         child.style.top = '300px'
                         child.style.left = '500px'
                     }, '1200');
                 }
             })
+            // child.addEventListener('mouseover', () => {
+            //     child.style.transform = "translateY(-50px)";
+            // })
             j++;
         }
     })

@@ -42,6 +42,10 @@
     transition: transform 1s ease 0s; */
 }
 
+.card-container:hover {
+    transform: translateY(-50px);
+}
+
 .card:hover {
     transform: translateY(-50px);
 }
