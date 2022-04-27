@@ -57,18 +57,20 @@ function allCards() {
                     child.style.left = `${cards[idx].left}px`;
                     child.style.top = `${cards[idx].top}px`;
                     setTimeout(() => {
-                        // child.style.zIndex = '0'
-                        child.style.webkitTransform = `rotate(${cards[idx].rotate}deg)`
-                        child.style.MozTransform = `rotate(${cards[idx].rotate}deg)`
-                        child.style.msTransform = `rotate(${cards[idx].rotate}deg)`
-                        child.style.OTransform = `rotate(${cards[idx].rotate}deg)`
-                        child.style.transform = `rotate(${cards[idx].rotate}deg)`
-                        child.childNodes[0].style.webkitTransform = 'none'
-                        child.childNodes[0].style.MozTransform = 'none'
-                        child.childNodes[0].style.msTransform = 'none'
-                        child.childNodes[0].style.OTransform = 'none'
-                        child.childNodes[0].style.transform = 'none'
+                        child.style.zIndex = '0'
                     }, '1000')
+                    setTimeout(() => {
+                            child.style.webkitTransform = `rotate(${cards[idx].rotate}deg)`
+                            child.style.MozTransform = `rotate(${cards[idx].rotate}deg)`
+                            child.style.msTransform = `rotate(${cards[idx].rotate}deg)`
+                            child.style.OTransform = `rotate(${cards[idx].rotate}deg)`
+                            child.style.transform = `rotate(${cards[idx].rotate}deg)`
+                            child.childNodes[0].style.webkitTransform = 'none'
+                            child.childNodes[0].style.MozTransform = 'none'
+                            child.childNodes[0].style.msTransform = 'none'
+                            child.childNodes[0].style.OTransform = 'none'
+                            child.childNodes[0].style.transform = 'none'
+                    }, '1250')
                 } else {
                     cards[idx].selected = true;
                     child.childNodes[0].style.webkitTransform = 'translateY(-330px)'
@@ -85,7 +87,7 @@ function allCards() {
                         child.style.transform = `none`
                         child.style.top = '300px'
                         child.style.left = '500px'
-                        // child.style.zIndex = 1;
+                        child.style.zIndex = 1;
                     }, '1000');
                 }
             })
