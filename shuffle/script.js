@@ -9,6 +9,7 @@
 //--put cards back
 //rearrange photo to make room for bio underneath
 //fix re-hover bug
+//test transform in css
 
 
 //now on hover I want to change their Y index to show user they have been hovered on
@@ -72,7 +73,7 @@ function allCards() {
                         child.childNodes[0].style.OTransform = 'translateY(0px)'
                         child.childNodes[0].style.transform = 'translateY(0px)'
                     }, '1250')
-                    child.addEventListener('mouseleave')
+                    
                 } else { //card is in hand
                     child.childNodes[0].style.webkitTransform = 'translateY(-330px)'
                     child.childNodes[0].style.MozTransform = 'translateY(-330px)'
