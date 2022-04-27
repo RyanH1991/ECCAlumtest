@@ -6,8 +6,9 @@
 //--then grow the card and bring it to the center of the screen
 //now lets work on the close feature
 //we should only be able to interact with one card at a time
-//put cards back
+//--put cards back
 //rearrange photo to make room for bio underneath
+//fix re-hover bug
 
 
 //now on hover I want to change their Y index to show user they have been hovered on
@@ -34,7 +35,7 @@ function allCards() {
         // console.log(j)
         // console.log(child)
         if (idx > 0) {
-            let top = (3 * j * j) - (2 * j) + 10
+            let top = (3 * j * j) - (4 * j) + 10
             cards[idx] = {
                 div: child,
                 rotate: j*5,
@@ -52,7 +53,6 @@ function allCards() {
             child.style.top = `${top}px`
             child.addEventListener('click', () => {
                 if (cards[idx].selected) {
-                    cards[idx].selected = false;
                     child.classList.remove('grow-card');
                     child.style.left = `${cards[idx].left}px`;
                     child.style.top = `${cards[idx].top}px`;
@@ -60,6 +60,7 @@ function allCards() {
                         child.style.zIndex = '0'
                     }, '1000')
                     setTimeout(() => {
+                        cards[idx].selected = false;
                         child.style.webkitTransform = `rotate(${cards[idx].rotate}deg)`
                         child.style.MozTransform = `rotate(${cards[idx].rotate}deg)`
                         child.style.msTransform = `rotate(${cards[idx].rotate}deg)`
@@ -72,7 +73,6 @@ function allCards() {
                         child.childNodes[0].style.transform = 'none'
                     }, '1250')
                 } else {
-                    cards[idx].selected = true;
                     child.childNodes[0].style.webkitTransform = 'translateY(-330px)'
                     child.childNodes[0].style.MozTransform = 'translateY(-330px)'
                     child.childNodes[0].style.msTransform = 'translateY(-330px)'
@@ -82,6 +82,7 @@ function allCards() {
                         child.style.zIndex = 1;
                     }, '800')
                     setTimeout(() => {
+                        cards[idx].selected = true;
                         child.classList.add('grow-card');
                         child.style.webkitTransform = `none`
                         child.style.MozTransform = `none`
