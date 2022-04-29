@@ -16,6 +16,7 @@
 
 //we should only be able to interact with one card at a time
 //as soon as we click on any card I shouldn't be able to interact with any other card
+//make the entire background slowly grey out and immediately uninteractable
 
 const container = document.querySelector('.container');
 // container.innerHTML = "SOMETHING";
