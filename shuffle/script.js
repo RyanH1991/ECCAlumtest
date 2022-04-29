@@ -9,7 +9,9 @@
 //--put cards back
 //rearrange photo to make room for bio underneath
 //fix re-hover bug
-//test transform in css
+//--test transform in css
+//--test changing the card's top feature
+//test solely changing the card-container and allowing the hover feature persist for card
 
 
 //now on hover I want to change their Y index to show user they have been hovered on
@@ -53,33 +55,52 @@ function allCards() {
             child.style.left = `${idx * 75}px`
             child.style.top = `${top}px`
             child.addEventListener('click', () => {
-                if (cards[idx].selected) { //card is alreadt showcased
+                if (cards[idx].selected) { //card is already showcased
                     child.classList.remove('grow-card');
                     child.style.left = `${cards[idx].left}px`;
                     child.style.top = `${cards[idx].top}px`;
+                    child.style.webkitTransform = 'translateY(-330px)'
+                    child.style.MozTransform = 'translateY(-330px)'
+                    child.style.msTransform = 'translateY(-330px)'
+                    child.style.OTransform = 'translateY(-330px)'
+                    child.style.transform = 'translateY(-330px)'
                     setTimeout(() => {
                         child.style.zIndex = '0'
                     }, '1000')
                     setTimeout(() => {
                         cards[idx].selected = false;
-                        child.style.webkitTransform = `rotate(${cards[idx].rotate}deg)`
-                        child.style.MozTransform = `rotate(${cards[idx].rotate}deg)`
-                        child.style.msTransform = `rotate(${cards[idx].rotate}deg)`
-                        child.style.OTransform = `rotate(${cards[idx].rotate}deg)`
-                        child.style.transform = `rotate(${cards[idx].rotate}deg)`
-                        child.childNodes[0].style.webkitTransform = 'translateY(0px)'
-                        child.childNodes[0].style.MozTransform = 'translateY(0px)'
-                        child.childNodes[0].style.msTransform = 'translateY(0px)'
-                        child.childNodes[0].style.OTransform = 'translateY(0px)'
-                        child.childNodes[0].style.transform = 'translateY(0px)'
+                        child.style.webkitTransform = `rotate(${cards[idx].rotate}deg`
+                        child.style.MozTransform = `rotate(${cards[idx].rotate}deg`
+                        child.style.msTransform = `rotate(${cards[idx].rotate}deg`
+                        child.style.OTransform = `rotate(${cards[idx].rotate}deg`
+                        child.style.transform = `rotate(${cards[idx].rotate}deg`
+                        // child.childNodes[0].style.webkitTransform = 'translateY(0px)'
+                        // child.childNodes[0].style.MozTransform = 'translateY(0px)'
+                        // child.childNodes[0].style.msTransform = 'translateY(0px)'
+                        // child.childNodes[0].style.OTransform = 'translateY(0px)'
+                        // child.childNodes[0].style.transform = 'translateY(0px)'
+                        child.style.webkitTransform += 'translateY(0px)'
+                        child.style.MozTransform += 'translateY(0px)'
+                        child.style.msTransform += 'translateY(0px)'
+                        child.style.OTransform += 'translateY(0px)'
+                        child.style.transform += 'translateY(0px)'
+
+                        // child.childNodes[0].classList.add('hover-card');
                     }, '1250')
                     
                 } else { //card is in hand
-                    child.childNodes[0].style.webkitTransform = 'translateY(-330px)'
-                    child.childNodes[0].style.MozTransform = 'translateY(-330px)'
-                    child.childNodes[0].style.msTransform = 'translateY(-330px)'
-                    child.childNodes[0].style.OTransform = 'translateY(-330px)'
-                    child.childNodes[0].style.transform = 'translateY(-330px)'
+                    // child.childNodes[0].classList.remove('hover-card');
+
+                    // child.childNodes[0].style.webkitTransform = 'translateY(-330px)'
+                    // child.childNodes[0].style.MozTransform = 'translateY(-330px)'
+                    // child.childNodes[0].style.msTransform = 'translateY(-330px)'
+                    // child.childNodes[0].style.OTransform = 'translateY(-330px)'
+                    // child.childNodes[0].style.transform = 'translateY(-330px)'
+                    child.style.webkitTransform = 'translateY(-330px)'
+                    child.style.MozTransform = 'translateY(-330px)'
+                    child.style.msTransform = 'translateY(-330px)'
+                    child.style.OTransform = 'translateY(-330px)'
+                    child.style.transform = 'translateY(-330px)'
                     setTimeout(() => {
                         child.style.zIndex = 1;
                     }, '800')
@@ -94,11 +115,14 @@ function allCards() {
                         child.style.top = '300px'
                         child.style.left = '500px'
                     }, '1200');
+                    // child.childNodes[0].addEventListener('mouseover', () => {
+                    //     child.childNodes[0].style.transform = "translateY(-50px)";
+                    // })
+                    // child.childNodes[0].addEventListener('mouseleave', () => {
+                        // child.childNodes[0].style.transform = "translateY(0px)";
+                    // })
                 }
             })
-            // child.addEventListener('mouseover', () => {
-            //     child.style.transform = "translateY(-50px)";
-            // })
             j++;
         }
     })
