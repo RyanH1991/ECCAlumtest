@@ -6,8 +6,8 @@
 }
 
 .card {
-    z-index: 0;
-    background-color: transparent;
+    /* z-index: 0;
+    background-color: transparent; */
 
     width: 200px;
     height: 300px;
@@ -30,8 +30,8 @@
 }
 
 .card-container {
-    border: 1px solid red;
-    background-color: red;
+    /* border: 1px solid red;
+    background-color: red; */
     /* z-index: 3; */
 
     cursor: pointer;
@@ -49,17 +49,17 @@
     transition: transform 1s ease 0s; */
 }
 
-.card-container:hover {
+/* .card-container:hover {
     top: 50px;
-}
-
-/* .hover-card:hover {
-    transform: translateY(-50px);
 } */
 
-.card:hover {
+.hover-card:hover {
     transform: translateY(-50px);
 }
+
+/* .card:hover {
+    transform: translateY(-50px);
+} */
 
 .card-image {
     max-width: 100%;
@@ -69,4 +69,7 @@
 .grow-card {
     height: 600px;
     width: 400px;
+
+    /* top: 300px;
+    left: 500px; */
 }

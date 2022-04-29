@@ -5,16 +5,17 @@
 //--when the card is clicked I want to pull the card all the wat out,
 //--then grow the card and bring it to the center of the screen
 //now lets work on the close feature
-//we should only be able to interact with one card at a time
 //--put cards back
 //rearrange photo to make room for bio underneath
 //fix re-hover bug
 //--test transform in css
 //--test changing the card's top feature
-//test solely changing the card-container and allowing the hover feature persist for card
+//--test solely changing the card-container and allowing the hover feature persist for card
+//--now on hover I want to change their Y index to show user they have been hovered on
 
 
-//now on hover I want to change their Y index to show user they have been hovered on
+//we should only be able to interact with one card at a time
+//as soon as we click on any card I shouldn't be able to interact with any other card
 
 const container = document.querySelector('.container');
 // container.innerHTML = "SOMETHING";
@@ -25,6 +26,7 @@ function allCards() {
         newCardContainer.className = 'card-container'
         let newCard = document.createElement('div');
         newCard.className = 'card';
+        newCard.classList.add('hover-card')
         let newImg = document.createElement('img');
         newImg.src = `/images/img${i}.JPG`;
         newImg.className = "card-image";
@@ -85,11 +87,11 @@ function allCards() {
                         child.style.OTransform += 'translateY(0px)'
                         child.style.transform += 'translateY(0px)'
 
-                        // child.childNodes[0].classList.add('hover-card');
+                        child.childNodes[0].classList.add('hover-card');
                     }, '1250')
                     
                 } else { //card is in hand
-                    // child.childNodes[0].classList.remove('hover-card');
+                    child.childNodes[0].classList.remove('hover-card');
 
                     // child.childNodes[0].style.webkitTransform = 'translateY(-330px)'
                     // child.childNodes[0].style.MozTransform = 'translateY(-330px)'
