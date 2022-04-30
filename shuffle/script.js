@@ -4,19 +4,19 @@
 //--just add an external div with the additional transform features
 //--when the card is clicked I want to pull the card all the wat out,
 //--then grow the card and bring it to the center of the screen
-//now lets work on the close feature
 //--put cards back
-//rearrange photo to make room for bio underneath
-//fix re-hover bug
+//--fix re-hover bug
 //--test transform in css
 //--test changing the card's top feature
 //--test solely changing the card-container and allowing the hover feature persist for card
 //--now on hover I want to change their Y index to show user they have been hovered on
 
 
+//now lets work on the close feature
 //we should only be able to interact with one card at a time
 //as soon as we click on any card I shouldn't be able to interact with any other card
 //make the entire background slowly grey out and immediately uninteractable
+//rearrange photo to make room for bio underneath
 
 const container = document.querySelector('.container');
 // container.innerHTML = "SOMETHING";
@@ -28,11 +28,18 @@ function allCards() {
         let newCard = document.createElement('div');
         newCard.className = 'card';
         newCard.classList.add('hover-card')
+        let imgContainer = document.createElement('div');
+        imgContainer.className = 'image-container';
         let newImg = document.createElement('img');
         newImg.src = `/images/img${i}.JPG`;
         newImg.className = "card-image";
+        imgContainer.appendChild(newImg);
+        let cardBio = document.createElement('div');
+        cardBio.className = 'card-bio';
+        cardBio.innerHTML = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
         newCardContainer.appendChild(newCard);
-        newCard.appendChild(newImg);
+        newCard.appendChild(imgContainer);
+        newCard.appendChild(cardBio);
         container.appendChild(newCardContainer);
     }
     let cards = {};
