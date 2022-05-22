@@ -1,27 +1,27 @@
-var path = require('path');
-
+const path = require('path');
 module.exports = {
-    entry: "./frontend/index.js",
+    context: __dirname,
+    entry: './frontend/entry.jsx', //half_time is just an example
     output: {
         path: path.resolve(__dirname, 'app', 'assets', 'javascripts'),
-        filename: "bundle.js"
+        filename: 'bundle.js'
+    },
+    resolve: {
+        extensions: ['.js', '.jsx', '*']
     },
     module: {
         rules: [
             {
-                test: [/\.jsx?$/],
+                test: /\.jsx?$/,
                 exclude: /(node_modules)/,
                 use: {
                     loader: 'babel-loader',
-                    query: {
+                    options: {
                         presets: ['@babel/env', '@babel/react']
                     }
                 },
             }
         ]
     },
-    devtool: 'eval-source-map',
-    resolve: {
-        extensions: ['.js', '.jsx', '*']
-    }
-}
+    devtool: 'source-map'
+};

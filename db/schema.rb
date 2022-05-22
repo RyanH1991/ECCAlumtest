@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_10_025915) do
+ActiveRecord::Schema.define(version: 2022_05_20_204233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2022_05_10_025915) do
     t.string "job_company_industry"
     t.string "facebook_url"
     t.string "street_address"
+    t.string "inferred_salary"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["personal_email"], name: "index_users_on_personal_email", unique: true

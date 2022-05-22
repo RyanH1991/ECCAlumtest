@@ -19,6 +19,7 @@
                         :job_title_role,
                         :job_company_name,
                         :job_company_industry,
+                        :inferred_salary,
                         :facebook_url,
                         :street_address
     end
