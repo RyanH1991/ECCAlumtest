@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import createStore from './store/store';
 import Root from './components/root';
-import { getUsers, getUser } from './util/users'
+import { fetchUsers, fetchUser } from './util/users_util'
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 //       }
                 //     };
                 //   }
-    console.log(getUsers())
+  console.log(fetchUsers())
   console.log('something')
   const store = createStore(preloadedState);
   ReactDOM.render(<Root store={store} />, root);
