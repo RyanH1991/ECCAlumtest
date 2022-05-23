@@ -30,12 +30,10 @@ class UserIndex extends React.Component {
                 </div>
             }
 
-            let phone_number = null;
-            if (user.phone_number) {
-                console.log(user.first_name)
-                console.log(user.phone_number)
-                phone_number = <div className='phone-social-icon'>
-                    <img src={window.phone_number} className="phone-social-icon" alt="" />
+            let phone_numbers = null;
+            if (user.phone_numbers) {
+                phone_numbers = <div className='phone-social-icon'>
+                    <img src={window.phoneIcon} className="phone-social-icon" alt="" />
                 </div>
             }
             return  <div className='user' key={user.id}>
@@ -59,8 +57,7 @@ class UserIndex extends React.Component {
                             </a>
                             {facebook_url}
                             {email}
-                            <img src={window.phoneIcon} className="phone-social-icon" alt="" />
-                            {/* {phone_number} */}
+                            {phone_numbers}
                         </div>
                     </div>
         })

@@ -12,7 +12,7 @@
                         :last_name,
                         :gender,
                         :birthdate,
-                        :phone_number,
+                        :phone_numbers,
                         :linkedin_url,
                         :industry,
                         :job_title,
