@@ -24,11 +24,13 @@ $darkest-gray: #2d333f;
     font-family: $montseratt;
     font-weight: 400;
     text-decoration: none;
-    height: 240px;
+    height: 225px;
     width: 150px;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     border: 1px solid $light-gray;
     margin: 10px;
 
@@ -73,25 +75,59 @@ $darkest-gray: #2d333f;
 .social-icon-container {
     display: flex;
     flex-direction: row;
-}
-
-.social-icon-container {
-    width: fit-content;
-    height: fit-content;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 135px;
+    height: 34px;
+    background-color: $lightest-gray;
+    border: 1px solid $gray;
+    border-radius: inherit;
+    margin-bottom: 5px;
 }
 
 .social-icon {
-    width: 50px;
-    height: 50px;
-
+    width: 32px;
+    height: 32px;
+    border-radius: inherit;
     transition: all 1s ease 0s;
 }
 
 .social-icon:hover {
     cursor: pointer;
-    transform: translateY(-3px);
-    transition: 0.3s;
-    -webkit-box-shadow: 0 2px 6px $light-gray;
-    -moz-box-shadow:    0 2px 6px $light-gray;
-    box-shadow:         0 2px 6px $light-gray;
+    filter: drop-shadow(0 0 0.75rem $gray);
+    // box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8)
+}
+
+.fb-social-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    transition: all 1s ease 0s;
+}
+
+.fb-social-icon:hover {
+    cursor: pointer;
+    filter: drop-shadow(0 0 0.75rem $gray);
+}
+
+.email-social-icon {
+    width: 28.5px;
+    height: 28.5px;
+    transition: all 1s ease 0s;
+}
+
+.email-social-icon:hover {
+    cursor: pointer;
+    filter: drop-shadow(0 0 0.75rem $gray);
+}
+
+.phone-social-icon {
+    width: 28.5px;
+    height: 28.5px;
+    transition: all 1s ease 0s;
+}
+
+.phone-social-icon:hover {
+    cursor: pointer;
+    filter: drop-shadow(0 0 0.75rem $gray);
 }

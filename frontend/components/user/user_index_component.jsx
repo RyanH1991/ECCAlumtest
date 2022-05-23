@@ -16,17 +16,17 @@ class UserIndex extends React.Component {
             let facebook_url = null;
             if (user.facebook_url) {
                 facebook_url = <a href={"https://" + user.facebook_url}
-                                  className="social-icon-container"
+                                  className="fb-social-icon"
                                   target="_blank" 
                                   rel="noopener noreferrer">
-                    <img src={window.facebookIcon} className="social-icon" alt="" />
+                    <img src={window.facebookIcon} className="fb-social-icon" alt="" />
                 </a>
             }
 
             let email = null;
             if (user.personal_email.includes('@')) {
-                email = <div>
-                    <img src={window.emailIcon} className="social-icon" alt="" />
+                email = <div className='email-social-icon'>
+                    <img src={window.emailIcon} className="email-social-icon" alt="" />
                 </div>
             }
 
@@ -34,8 +34,8 @@ class UserIndex extends React.Component {
             if (user.phone_number) {
                 console.log(user.first_name)
                 console.log(user.phone_number)
-                phone_number = <div>
-                    <img src={window.phone_number} className="social-icon" alt="" />
+                phone_number = <div className='phone-social-icon'>
+                    <img src={window.phone_number} className="phone-social-icon" alt="" />
                 </div>
             }
             return  <div className='user' key={user.id}>
@@ -51,15 +51,16 @@ class UserIndex extends React.Component {
                             </div>
                         </div>
                         <div className='social-icon-container'>
-                            {phone_number}
-                            {email}
-                            {facebook_url}
                             <a href={"https://" + user.linkedin_url}
-                               className="social-icon-container"
+                               className="social-icon"
                                target="_blank" 
                                rel="noopener noreferrer">
                                 <img src={window.linkedInIcon} className="social-icon" alt="" />
                             </a>
+                            {facebook_url}
+                            {email}
+                            <img src={window.phoneIcon} className="phone-social-icon" alt="" />
+                            {/* {phone_number} */}
                         </div>
                     </div>
         })
