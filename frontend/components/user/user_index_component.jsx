@@ -3,7 +3,16 @@ import React from 'react';
 class UserIndex extends React.Component {
     constructor(props) {
         super(props)
-        console.log('we are in the User Index')
+        this.state = {isToggleOn: true};
+
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+        this.setState(prevState => ({
+            isToggleOn: !prevState.isToggleOn
+        }));
+        console.log('you clicked it!')
     }
 
     componentDidMount() {
@@ -25,9 +34,10 @@ class UserIndex extends React.Component {
 
             let email = null;
             if (user.personal_email.includes('@')) {
-                email = <div className='email-social-icon'>
+                email = <button className='email-social-icon'
+                                onClick={this.handleClick}>
                     <img src={window.emailIcon} className="email-social-icon" alt="" />
-                </div>
+                </button>
             }
 
             let phone_numbers = null;
