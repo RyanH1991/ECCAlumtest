@@ -111,19 +111,20 @@ class Search extends React.Component {
                 let firstNamesArr = [];
                 currentNodeF.words.forEach(firstName => {
                     let remainingName = firstName.slice(this.state.searchTerm.length)
+                    let cappedWord = this.state.searchTerm[0].toUpperCase() + this.state.searchTerm.slice(1)
                     trieObj.first_name[firstName].forEach(lastName => {
                         firstNamesArr.push(
-                            <div className='search-full-name'>
-                                <strong>{this.state.searchTerm}</strong><div>{remainingName}</div>
+                            <div className='search-list-item'>
+                                <div className='bold-frag'>{cappedWord}</div><div>{remainingName}</div>
                                 <>&nbsp;</>
-                                <div>{lastName}</div>
+                                <div>{lastName[0].toUpperCase() + lastName.slice(1)}</div>
                             </div>
                         )
                     })
                 })
                 firstNames = <div className='first-names-container'>
-                                <div className='first-names-title'>
-                                    SEARCH FIRST NAME
+                                <div className='search-term-title'>
+                                    SEARCH BY FIRST NAME
                                 </div>
                                 <div className='first-names'>
                                     {firstNamesArr}
@@ -134,18 +135,19 @@ class Search extends React.Component {
                 let lastNamesArr = [];
                 currentNodeL.words.forEach(lastName => {
                     let remainingName = lastName.slice(this.state.searchTerm.length)
+                    let cappedWord = this.state.searchTerm[0].toUpperCase() + this.state.searchTerm.slice(1)
                     trieObj.last_name[lastName].forEach(firstName => {
                         lastNamesArr.push(
-                            <div className='search-full-name'>
-                                <div>{firstName}</div>
+                            <div className='search-list-item'>
+                                <div>{firstName[0].toUpperCase() + firstName.slice(1)}</div>
                                 <>&nbsp;</>
-                                <strong>{this.state.searchTerm}</strong><div>{remainingName}</div>
+                                <div className='bold-frag'>{cappedWord}</div><div>{remainingName}</div>
                             </div>
                         )
                     })
                 })
                 lastNames = <div className='last-names-container'>
-                                <div className='last-names-title'>
+                                <div className='search-term-title'>
                                     SEARCH BY LAST NAME
                                 </div>
                                 <div className='last-names'>
@@ -158,14 +160,16 @@ class Search extends React.Component {
                 currentNodeI.words.forEach(industryName => {
                     let remainingName = industryName.slice(this.state.searchTerm.length)
                     let innerIndustryNames = []
+                    let cappedWord = this.state.searchTerm[0].toUpperCase() + this.state.searchTerm.slice(1)
                     trieObj.industry[industryName].forEach(fullName => {
-                        innerIndustryNames.push(<div>{fullName}</div>)
+                        let cappedName = fullName.split(' ').map(ele => ele[0].toUpperCase() + ele.slice(1)).join(' ')
+                        innerIndustryNames.push(<button className='search-list-item'>{cappedName}</button>)
                     })
                     industryNamesArr.push(
                         <div>
-                            <div className='search-industry-name'>
-                                <strong>{this.state.searchTerm}</strong><div>{remainingName}</div>
-                            </div>
+                            <button className='search-industry-name'>
+                                <div className='bold-frag'>{cappedWord}</div><div>{remainingName}</div>
+                            </button>
                             <div className='inner-industry-names'>
                                 {innerIndustryNames}
                             </div>
@@ -173,7 +177,7 @@ class Search extends React.Component {
                     )
                 })
                 industryNames = <div className='industry-names-container'>
-                                    <div className='industry-names-title'>
+                                    <div className='search-term-title'>
                                         INDUSTRY
                                     </div>
                                     <div className='industry-names'>
@@ -183,20 +187,20 @@ class Search extends React.Component {
             }
         }
         return (
-            <div>
-                This is where the Search bar is going
-                <div>
+            <div className='search-outer-container'>
+                <div className='search-container-title'>Find Alumni</div>
+                <div className='search-inner-container'>
                     <input type="text" 
                            className="search-text-box"
                            value={this.state.searchTerm}
                            onChange={this.handleChange}
                            placeholder="First name, Last name, or Industry"
                            />
-                        <div className='search-dropdown'>
-                            {firstNames}
-                            {lastNames}
-                            {industryNames}
-                        </div>
+                    <div className='search-dropdown'>
+                        {firstNames}
+                        {lastNames}
+                        {industryNames}
+                    </div>
                 </div>
             </div>
         )

@@ -1,12 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300;400;500;600;700&display=swap');
 
+$montseratt: 'Montserrat', sans-serif;
 
+$serif: georgia,"times new roman",times,serif;
+$sans-serif: arial, helvetica, sans-serif;
 
-.search-full-name {
+$lightest-gray: #f7f7f5;
+$light-gray: #e2e2e2;
+$gray: #999;
+$dark-gray: #6f6f6f;
+$darkest-gray: #2d333f;
+$dark-blue: #00008B;
+
+.search-outer-container {
     display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    background-color: #2d333f;
+    height: 150px;
+}
+
+.search-container-title {
+    color: white;
+    font-size: 35px;
+}
+
+.search-text-box {
+    display: block;
+    font-family: inherit;
+    border-style: none;
+    border-radius: 4px;
+    width: 300px;
+    height: 40px;
+    padding-left: 10px;
+    font-size: 16px;
+}
+
+.search-text-box:focus {
+    outline: none;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.search-inner-container:focus-within .search-dropdown {
+    font-family: $montseratt;
+    line-height: 25px;
+    display: block;
+    background-color: white;
+    padding: 0px;
+    width: -webkit-fill-available;
+    border: solid $light-gray 1px;
+    border-radius: 4px;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    position: absolute;
+}
+
+.search-inner-container {
+    position: relative;
+    height: fit-content;
+    margin-right: 2vw;
+    width: initial;
+}
+
+.search-dropdown {
+    display: none;
+}
+
+.search-term-title {
+    border-top: solid $light-gray 1px;
+    border-bottom: solid $light-gray 1px;
+    color: $dark-gray;
+    display: flex;
+    justify-content: center;
+}
+
+.first-names-container, .last-names-container, .industry-names-container {
+    max-height: 350px;
+    overflow: scroll;
+}
+
+.search-list-item {
+    color: $gray;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: medium;
+    font-family: inherit;
+    border: none;
+    background: inherit;
+    height: 100%;
+    width: inherit;
+    display: flex;
+    line-height: 24px;
+    text-align: left;
+}
+
+.search-list-item:hover {
+    cursor: pointer;
+    background-color: $dark-blue;
+    border-radius: initial;
+    color: white;
+}
+
+.bold-frag {
+    font-weight: 600;
 }
 
 .search-industry-name {
+    color: $dark-gray;
+    padding-left: 9px;
+    padding-right: 20px;
+    font-size: medium;
+    font-family: inherit;
+    border: none;
+    background: inherit;
+    height: 100%;
+    width: 100%;
     display: flex;
+    line-height: 24px;
+    text-align: left;
+}
+
+.search-industry-name:hover {
+    cursor: pointer;
+    background-color: $dark-blue;
+    border-radius: initial;
+    color: white;
 }
 
 .inner-industry-names {
