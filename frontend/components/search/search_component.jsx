@@ -72,6 +72,11 @@ class Search extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
+    handleSubmit(event) {
+        event.preventDefault()
+        console.log(event)
+    }
+
     handleChange(event) {
         this.setState({
             searchTerm: event.target.value
@@ -84,7 +89,7 @@ class Search extends React.Component {
         let currentNodeL = trieLastNames;
         let currentNodeI = trieIndustries;
         for (let i = 0; i < this.state.searchTerm.length; i++) {
-            let chr = this.state.searchTerm[i];
+            let chr = this.state.searchTerm[i].toLowerCase();
             if (currentNodeF && currentNodeF.map[chr]) {
                 currentNodeF = currentNodeF.map[chr]
             } else {
@@ -101,7 +106,6 @@ class Search extends React.Component {
                 currentNodeI = null;
             }
         }
-        console.log(currentNodeI)
         let firstNames = null;
         let lastNames = null;
         let industryNames = null;
@@ -111,7 +115,7 @@ class Search extends React.Component {
                 let firstNamesArr = [];
                 currentNodeF.words.forEach(firstName => {
                     let remainingName = firstName.slice(this.state.searchTerm.length)
-                    let cappedWord = this.state.searchTerm[0].toUpperCase() + this.state.searchTerm.slice(1)
+                    let cappedWord = this.state.searchTerm[0].toUpperCase() + this.state.searchTerm.slice(1).toLowerCase()
                     trieObj.first_name[firstName].forEach(lastName => {
                         firstNamesArr.push(
                             <div className='search-list-item'>
@@ -135,7 +139,7 @@ class Search extends React.Component {
                 let lastNamesArr = [];
                 currentNodeL.words.forEach(lastName => {
                     let remainingName = lastName.slice(this.state.searchTerm.length)
-                    let cappedWord = this.state.searchTerm[0].toUpperCase() + this.state.searchTerm.slice(1)
+                    let cappedWord = this.state.searchTerm[0].toUpperCase() + this.state.searchTerm.slice(1).toLowerCase()
                     trieObj.last_name[lastName].forEach(firstName => {
                         lastNamesArr.push(
                             <div className='search-list-item'>
@@ -160,14 +164,16 @@ class Search extends React.Component {
                 currentNodeI.words.forEach(industryName => {
                     let remainingName = industryName.slice(this.state.searchTerm.length)
                     let innerIndustryNames = []
-                    let cappedWord = this.state.searchTerm[0].toUpperCase() + this.state.searchTerm.slice(1)
+                    let cappedWord = this.state.searchTerm[0].toUpperCase() + this.state.searchTerm.slice(1).toLowerCase()
                     trieObj.industry[industryName].forEach(fullName => {
                         let cappedName = fullName.split(' ').map(ele => ele[0].toUpperCase() + ele.slice(1)).join(' ')
                         innerIndustryNames.push(<button className='search-list-item'>{cappedName}</button>)
                     })
                     industryNamesArr.push(
                         <div>
-                            <button className='search-industry-name'>
+                            <button className='search-industry-name'
+                                    value={cappedWord}
+                                    >
                                 <div className='bold-frag'>{cappedWord}</div><div>{remainingName}</div>
                             </button>
                             <div className='inner-industry-names'>
@@ -187,7 +193,8 @@ class Search extends React.Component {
             }
         }
         return (
-            <div className='search-outer-container'>
+            <form onSubmit={this.handleSubmit}
+                  className='search-outer-container'>
                 <div className='search-container-title'>Find Alumni</div>
                 <div className='search-inner-container'>
                     <input type="text" 
@@ -202,7 +209,8 @@ class Search extends React.Component {
                         {industryNames}
                     </div>
                 </div>
-            </div>
+                <button className="search-submit">Let's go</button>
+            </form>
         )
     }
 }
