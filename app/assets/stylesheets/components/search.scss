@@ -108,6 +108,10 @@ $dark-blue: #00008B;
     font-weight: 600;
 }
 
+.search-industry-name-container {
+    border-bottom: 1px solid $light-gray;
+}
+
 .search-industry-name {
     color: $dark-gray;
     padding-left: 9px;
@@ -121,6 +125,7 @@ $dark-blue: #00008B;
     display: flex;
     line-height: 24px;
     text-align: left;
+    text-decoration: underline;
 }
 
 .search-industry-name:hover {

@@ -8,15 +8,6 @@ import { fetchUsers, fetchUser } from './util/users_util'
 document.addEventListener('DOMContentLoaded', () => {
     const root = document.getElementById('root');
     let preloadedState = undefined;
-    //   if (window.currentUser) {
-        //     preloadedState = {
-            //       session: {
-                //         currentUser: window.currentUser
-                //       }
-                //     };
-                //   }
-  console.log(fetchUsers())
-  console.log('something')
-  const store = createStore(preloadedState);
-  ReactDOM.render(<Root store={store} />, root);
+    const store = createStore(preloadedState);
+    ReactDOM.render(<Root store={store} />, root);
 })

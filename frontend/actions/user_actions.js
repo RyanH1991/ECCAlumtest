@@ -31,7 +31,7 @@ export const fetchUser = (userId) => dispatch => (
         .then(user => dispatch(receiveUser(user)))
 )
 
-// export const searchUsers = (search) => dispatch => (
-//     UserAPIUtil.searchUsers(search)
-//         .then(searchResult => dispatch(receiveSearchedUsers(searchResult)))
-// )
+export const searchUsers = (search) => dispatch => (
+    UserAPIUtil.searchUsers(search)
+        .then(searchResult => dispatch(receiveSearchedUsers(searchResult)))
+)

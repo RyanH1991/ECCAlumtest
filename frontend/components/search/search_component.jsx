@@ -69,12 +69,15 @@ class Search extends React.Component {
             searchTerm: '',
         }
 
+        // console.log(this.props.searchUsers)
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit(event) {
         event.preventDefault()
-        console.log(event)
+        // console.log(event)
+        console.log(this.props.searchUsers(this.state.searchTerm.toLowerCase()))
     }
 
     handleChange(event) {
@@ -84,7 +87,6 @@ class Search extends React.Component {
     }
 
     render() {
-        console.log(this.state.searchTerm)
         let currentNodeF = trieFirstNames;
         let currentNodeL = trieLastNames;
         let currentNodeI = trieIndustries;
@@ -113,7 +115,13 @@ class Search extends React.Component {
             //I want to style each of the list of words
             if (currentNodeF) {
                 let firstNamesArr = [];
-                currentNodeF.words.forEach(firstName => {
+                let words;
+                if (currentNodeF.words.length) {
+                    words = currentNodeF.words;
+                } else { //handle leaf node case
+                    words = [fetchWord(currentNodeF)]
+                }
+                words.forEach(firstName => {
                     let remainingName = firstName.slice(this.state.searchTerm.length)
                     let cappedWord = this.state.searchTerm[0].toUpperCase() + this.state.searchTerm.slice(1).toLowerCase()
                     trieObj.first_name[firstName].forEach(lastName => {
@@ -137,7 +145,13 @@ class Search extends React.Component {
             }
             if (currentNodeL) {
                 let lastNamesArr = [];
-                currentNodeL.words.forEach(lastName => {
+                let words;
+                if (currentNodeL.words.length) {
+                    words = currentNodeL.words;
+                } else {
+                    words = [fetchWord(currentNodeL)]
+                }
+                words.forEach(lastName => {
                     let remainingName = lastName.slice(this.state.searchTerm.length)
                     let cappedWord = this.state.searchTerm[0].toUpperCase() + this.state.searchTerm.slice(1).toLowerCase()
                     trieObj.last_name[lastName].forEach(firstName => {
@@ -161,7 +175,13 @@ class Search extends React.Component {
             }
             if (currentNodeI) {
                 let industryNamesArr = [];
-                currentNodeI.words.forEach(industryName => {
+                let words;
+                if (currentNodeI.words.length) {
+                    words = currentNodeI.words;
+                } else {
+                    words = [fetchWord(currentNodeI)]
+                }
+                words.forEach(industryName => {
                     let remainingName = industryName.slice(this.state.searchTerm.length)
                     let innerIndustryNames = []
                     let cappedWord = this.state.searchTerm[0].toUpperCase() + this.state.searchTerm.slice(1).toLowerCase()
@@ -170,7 +190,7 @@ class Search extends React.Component {
                         innerIndustryNames.push(<button className='search-list-item'>{cappedName}</button>)
                     })
                     industryNamesArr.push(
-                        <div>
+                        <div className='search-industry-name-container'>
                             <button className='search-industry-name'
                                     value={cappedWord}
                                     >

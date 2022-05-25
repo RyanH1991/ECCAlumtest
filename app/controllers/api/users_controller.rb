@@ -22,7 +22,12 @@ class Api::UsersController < ApplicationController
     
     def search
         search = params[:search]
-        debugger
+        @users = User.where('first_name LIKE :search
+                            OR last_name LIKE :search
+                            OR industry LIKE :search',
+                            {search: "#{search}%"})
+        render :index
+        # debugger
     end
 
     private
