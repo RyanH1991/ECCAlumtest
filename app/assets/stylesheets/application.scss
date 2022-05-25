@@ -10,27 +10,12 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
+
  *= require_self
  */
-
  @import "base/*";
  @import "components/*";
- @import "*";
-
- @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300;400;500;600;700&display=swap');
-
- $montseratt: 'Montserrat', sans-serif;
  
- $serif: georgia,"times new roman",times,serif;
- $sans-serif: arial, helvetica, sans-serif;
- 
- $lightest-gray: #f7f7f5;
- $light-gray: #e2e2e2;
- $gray: #999;
- $dark-gray: #6f6f6f;
- $darkest-gray: #2d333f;
-
  :root {
      font-family: $montseratt;
  }

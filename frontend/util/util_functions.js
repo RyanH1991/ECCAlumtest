@@ -59,4 +59,4 @@ for (let key in trieObj.industry) {
     add(key, 0, trieIndustries)
 }
 
-// export { trieFirstNames, trieLastNames, trieIndustries };
+export { trieFirstNames, trieLastNames, trieIndustries };
