@@ -136,7 +136,6 @@ class Search extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault()
-        console.log(this.state.keyWord)
         let search;
         if (this.state.keyWord) {
             search = this.state.keyWord;
