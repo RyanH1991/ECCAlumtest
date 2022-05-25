@@ -1,16 +1,16 @@
 import React from 'react';
 import { trieFirstNames, trieLastNames, trieIndustries } from '../../util/util_functions'
 
-let trieObj = require('../../util/trieObj.json');
+const trieObj = require('../../util/trieObj.json');
 
 class Search extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             searchTerm: '',
+            keyWord: null
         }
 
-        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     
@@ -28,12 +28,14 @@ class Search extends React.Component {
             let cappedWord = this.state.searchTerm[0].toUpperCase() + this.state.searchTerm.slice(1).toLowerCase()
             trieObj.first_name[firstName].forEach(lastName => {
                 firstNamesArr.push(
-                    <div className='search-list-item'
-                         key={`f_${key_i++}`}>
+                    <button className='search-list-item'
+                         key={`f_${key_i++}`}
+                         value={firstName}
+                         onClick={this.update('keyWord')}>
                         <div className='bold-frag'>{cappedWord}</div><div>{remainingName}</div>
                         <>&nbsp;</>
                         <div>{lastName[0].toUpperCase() + lastName.slice(1)}</div>
-                    </div>
+                    </button>
                 )
             })
         })
@@ -62,12 +64,14 @@ class Search extends React.Component {
             let cappedWord = this.state.searchTerm[0].toUpperCase() + this.state.searchTerm.slice(1).toLowerCase()
             trieObj.last_name[lastName].forEach(firstName => {
                 lastNamesArr.push(
-                    <div className='search-list-item'
-                         key={`l_${key_i++}`}>
+                    <button className='search-list-item'
+                            key={`l_${key_i++}`}
+                            value={lastName}
+                            onClick={this.update('keyWord')}>
                         <div>{firstName[0].toUpperCase() + firstName.slice(1)}</div>
                         <>&nbsp;</>
                         <div className='bold-frag'>{cappedWord}</div><div>{remainingName}</div>
-                    </div>
+                    </button>
                 )
             })
         })
@@ -109,8 +113,8 @@ class Search extends React.Component {
                 <div className='search-industry-name-container'
                      key={`cont_i_${container_key_i++}`}>
                     <button className='search-industry-name'
-                            value={cappedWord}
-                            >
+                            value={industryName}
+                            onClick={this.update('keyWord')}>
                         <div className='bold-frag'>{cappedWord}</div><div>{remainingName}</div>
                     </button>
                     <div className='inner-industry-names'>
@@ -132,12 +136,19 @@ class Search extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault()
-        this.props.searchUsers(this.state.searchTerm.toLowerCase())
+        console.log(this.state.keyWord)
+        let search;
+        if (this.state.keyWord) {
+            search = this.state.keyWord;
+        } else {
+            search = this.state.searchTerm;
+        }
+        this.props.searchUsers(search)
     }
 
-    handleChange(event) {
-        this.setState({
-            searchTerm: event.target.value
+    update(field) {
+        return e => this.setState({
+            [field]: e.currentTarget.value
         })
     }
 
@@ -182,20 +193,22 @@ class Search extends React.Component {
             <form onSubmit={this.handleSubmit}
                   className='search-outer-container'>
                 <div className='search-container-title'>Find Alumni</div>
-                <div className='search-inner-container'>
-                    <input type="text" 
-                           className="search-text-box"
-                           value={this.state.searchTerm}
-                           onChange={this.handleChange}
-                           placeholder="First name, Last name, or Industry"
-                           />
-                    <div className='search-dropdown'>
-                        {firstNames}
-                        {lastNames}
-                        {industryNames}
+                <div className='search-middle-container'>
+                    <div className='search-inner-container'>
+                        <input type="text" 
+                            className="search-text-box"
+                            value={this.state.searchTerm}
+                            onChange={this.update('searchTerm')}
+                            placeholder="First name, Last name, or Industry"
+                            />
+                        <div className='search-dropdown'>
+                            {firstNames}
+                            {lastNames}
+                            {industryNames}
+                        </div>
                     </div>
+                    <button className="search-submit">Let's go</button>
                 </div>
-                <button className="search-submit">Let's go</button>
             </form>
         )
     }
