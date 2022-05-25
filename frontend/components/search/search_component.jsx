@@ -108,11 +108,11 @@ class Search extends React.Component {
         if (this.state.searchTerm) { //I know the user has started typing
             //I want to style each of the list of words
             if (currentNodeF) {
-                firstNames = [];
+                let firstNamesArr = [];
                 currentNodeF.words.forEach(firstName => {
                     let remainingName = firstName.slice(this.state.searchTerm.length)
                     trieObj.first_name[firstName].forEach(lastName => {
-                        firstNames.push(
+                        firstNamesArr.push(
                             <div className='search-full-name'>
                                 <strong>{this.state.searchTerm}</strong><div>{remainingName}</div>
                                 <>&nbsp;</>
@@ -120,22 +120,66 @@ class Search extends React.Component {
                             </div>
                         )
                     })
-                }) 
-
+                })
+                firstNames = <div className='first-names-container'>
+                                <div className='first-names-title'>
+                                    SEARCH FIRST NAME
+                                </div>
+                                <div className='first-names'>
+                                    {firstNamesArr}
+                                </div>
+                            </div>
             }
             if (currentNodeL) {
-                lastNames = currentNodeL.words.map(lName => {
-                    return  <div>
-                                {lName}
+                let lastNamesArr = [];
+                currentNodeL.words.forEach(lastName => {
+                    let remainingName = lastName.slice(this.state.searchTerm.length)
+                    trieObj.last_name[lastName].forEach(firstName => {
+                        lastNamesArr.push(
+                            <div className='search-full-name'>
+                                <div>{firstName}</div>
+                                <>&nbsp;</>
+                                <strong>{this.state.searchTerm}</strong><div>{remainingName}</div>
                             </div>
+                        )
+                    })
                 })
+                lastNames = <div className='last-names-container'>
+                                <div className='last-names-title'>
+                                    SEARCH BY LAST NAME
+                                </div>
+                                <div className='last-names'>
+                                    {lastNamesArr}
+                                </div>
+                            </div>
             }
             if (currentNodeI) {
-                industryNames = currentNodeI.words.map(iName => {
-                    return  <div>
-                                {iName}
+                let industryNamesArr = [];
+                currentNodeI.words.forEach(industryName => {
+                    let remainingName = industryName.slice(this.state.searchTerm.length)
+                    let innerIndustryNames = []
+                    trieObj.industry[industryName].forEach(fullName => {
+                        innerIndustryNames.push(<div>{fullName}</div>)
+                    })
+                    industryNamesArr.push(
+                        <div>
+                            <div className='search-industry-name'>
+                                <strong>{this.state.searchTerm}</strong><div>{remainingName}</div>
                             </div>
+                            <div className='inner-industry-names'>
+                                {innerIndustryNames}
+                            </div>
+                        </div>
+                    )
                 })
+                industryNames = <div className='industry-names-container'>
+                                    <div className='industry-names-title'>
+                                        INDUSTRY
+                                    </div>
+                                    <div className='industry-names'>
+                                        {industryNamesArr}
+                                    </div>
+                                </div>
             }
         }
         return (
@@ -149,30 +193,9 @@ class Search extends React.Component {
                            placeholder="First name, Last name, or Industry"
                            />
                         <div className='search-dropdown'>
-                            <div className='first-names-container'>
-                                <div className='first-names-title'>
-                                    FIRST NAMES
-                                </div>
-                                <div className='first-names'>
-                                    {firstNames}
-                                </div>
-                            </div>
-                            <div className='last-names-container'>
-                                <div className='last-names-title'>
-                                    LAST NAMES
-                                </div>
-                                <div className='last-names'>
-                                    {lastNames}
-                                </div>
-                            </div>
-                            <div className='industry-names'>
-                                <div className='industry-names-title'>
-                                    INDUSTRY NAMES
-                                </div>
-                                <div className='industry-names'>
-                                    {industryNames}
-                                </div>
-                            </div>
+                            {firstNames}
+                            {lastNames}
+                            {industryNames}
                         </div>
                 </div>
             </div>
