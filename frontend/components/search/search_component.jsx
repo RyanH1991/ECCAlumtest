@@ -13,6 +13,122 @@ class Search extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+    
+    buildFirstNamesDropdown(currentNodeF) {
+        let firstNamesArr = [];
+        let words;
+        if (currentNodeF.words.length) {
+            words = currentNodeF.words;
+        } else { //handle leaf node case
+            words = [fetchWord(currentNodeF)]
+        }
+        let key_i = 0;
+        words.forEach(firstName => {
+            let remainingName = firstName.slice(this.state.searchTerm.length)
+            let cappedWord = this.state.searchTerm[0].toUpperCase() + this.state.searchTerm.slice(1).toLowerCase()
+            trieObj.first_name[firstName].forEach(lastName => {
+                firstNamesArr.push(
+                    <div className='search-list-item'
+                         key={`f_${key_i++}`}>
+                        <div className='bold-frag'>{cappedWord}</div><div>{remainingName}</div>
+                        <>&nbsp;</>
+                        <div>{lastName[0].toUpperCase() + lastName.slice(1)}</div>
+                    </div>
+                )
+            })
+        })
+        return  <div className='first-names-container'
+                     key='first-names-container'>
+                    <div className='search-term-title'>
+                        SEARCH BY FIRST NAME
+                    </div>
+                    <div className='first-names'>
+                        {firstNamesArr}
+                    </div>
+                </div>
+    }
+
+    buildLastNamesDropdown(currentNodeL) {
+        let lastNamesArr = [];
+        let words;
+        if (currentNodeL.words.length) {
+            words = currentNodeL.words;
+        } else {
+            words = [fetchWord(currentNodeL)]
+        }
+        let key_i = 0
+        words.forEach(lastName => {
+            let remainingName = lastName.slice(this.state.searchTerm.length)
+            let cappedWord = this.state.searchTerm[0].toUpperCase() + this.state.searchTerm.slice(1).toLowerCase()
+            trieObj.last_name[lastName].forEach(firstName => {
+                lastNamesArr.push(
+                    <div className='search-list-item'
+                         key={`l_${key_i++}`}>
+                        <div>{firstName[0].toUpperCase() + firstName.slice(1)}</div>
+                        <>&nbsp;</>
+                        <div className='bold-frag'>{cappedWord}</div><div>{remainingName}</div>
+                    </div>
+                )
+            })
+        })
+        return  <div className='last-names-container'
+                     key='last-names-container'>
+                    <div className='search-term-title'>
+                        SEARCH BY LAST NAME
+                    </div>
+                    <div className='last-names'>
+                        {lastNamesArr}
+                    </div>
+                </div>
+    }
+
+    buildIndustriesDropdown(currentNodeI) {
+        let industryNamesArr = [];
+        let words;
+        if (currentNodeI.words.length) {
+            words = currentNodeI.words;
+        } else {
+            words = [fetchWord(currentNodeI)]
+        }
+        let key_i = 0;
+        let container_key_i = 0;
+        words.forEach(industryName => {
+            let remainingName = industryName.slice(this.state.searchTerm.length)
+            let innerIndustryNames = []
+            let cappedWord = this.state.searchTerm[0].toUpperCase() + this.state.searchTerm.slice(1).toLowerCase()
+            trieObj.industry[industryName].forEach(fullName => {
+                let cappedName = fullName.split(' ').map(ele => ele[0].toUpperCase() + ele.slice(1)).join(' ')
+                innerIndustryNames.push(
+                    <button className='search-list-item'
+                            key={`i_${key_i++}`}>
+                        {cappedName}
+                    </button>
+                )
+            })
+            industryNamesArr.push(
+                <div className='search-industry-name-container'
+                     key={`cont_i_${container_key_i++}`}>
+                    <button className='search-industry-name'
+                            value={cappedWord}
+                            >
+                        <div className='bold-frag'>{cappedWord}</div><div>{remainingName}</div>
+                    </button>
+                    <div className='inner-industry-names'>
+                        {innerIndustryNames}
+                    </div>
+                </div>
+            )
+        })
+        return  <div className='industry-names-container'
+                     key='industry-names-container'>
+                    <div className='search-term-title'>
+                        INDUSTRY
+                    </div>
+                    <div className='industry-names'>
+                        {industryNamesArr}
+                    </div>
+                </div>
+    }
 
     handleSubmit(event) {
         event.preventDefault()
@@ -53,102 +169,13 @@ class Search extends React.Component {
         if (this.state.searchTerm) { //I know the user has started typing
             //I want to style each of the list of words
             if (currentNodeF) {
-                let firstNamesArr = [];
-                let words;
-                if (currentNodeF.words.length) {
-                    words = currentNodeF.words;
-                } else { //handle leaf node case
-                    words = [fetchWord(currentNodeF)]
-                }
-                words.forEach(firstName => {
-                    let remainingName = firstName.slice(this.state.searchTerm.length)
-                    let cappedWord = this.state.searchTerm[0].toUpperCase() + this.state.searchTerm.slice(1).toLowerCase()
-                    trieObj.first_name[firstName].forEach(lastName => {
-                        firstNamesArr.push(
-                            <div className='search-list-item'>
-                                <div className='bold-frag'>{cappedWord}</div><div>{remainingName}</div>
-                                <>&nbsp;</>
-                                <div>{lastName[0].toUpperCase() + lastName.slice(1)}</div>
-                            </div>
-                        )
-                    })
-                })
-                firstNames = <div className='first-names-container'>
-                                <div className='search-term-title'>
-                                    SEARCH BY FIRST NAME
-                                </div>
-                                <div className='first-names'>
-                                    {firstNamesArr}
-                                </div>
-                            </div>
+                firstNames = this.buildFirstNamesDropdown(currentNodeF)
             }
             if (currentNodeL) {
-                let lastNamesArr = [];
-                let words;
-                if (currentNodeL.words.length) {
-                    words = currentNodeL.words;
-                } else {
-                    words = [fetchWord(currentNodeL)]
-                }
-                words.forEach(lastName => {
-                    let remainingName = lastName.slice(this.state.searchTerm.length)
-                    let cappedWord = this.state.searchTerm[0].toUpperCase() + this.state.searchTerm.slice(1).toLowerCase()
-                    trieObj.last_name[lastName].forEach(firstName => {
-                        lastNamesArr.push(
-                            <div className='search-list-item'>
-                                <div>{firstName[0].toUpperCase() + firstName.slice(1)}</div>
-                                <>&nbsp;</>
-                                <div className='bold-frag'>{cappedWord}</div><div>{remainingName}</div>
-                            </div>
-                        )
-                    })
-                })
-                lastNames = <div className='last-names-container'>
-                                <div className='search-term-title'>
-                                    SEARCH BY LAST NAME
-                                </div>
-                                <div className='last-names'>
-                                    {lastNamesArr}
-                                </div>
-                            </div>
+                lastNames = this.buildLastNamesDropdown(currentNodeL)
             }
             if (currentNodeI) {
-                let industryNamesArr = [];
-                let words;
-                if (currentNodeI.words.length) {
-                    words = currentNodeI.words;
-                } else {
-                    words = [fetchWord(currentNodeI)]
-                }
-                words.forEach(industryName => {
-                    let remainingName = industryName.slice(this.state.searchTerm.length)
-                    let innerIndustryNames = []
-                    let cappedWord = this.state.searchTerm[0].toUpperCase() + this.state.searchTerm.slice(1).toLowerCase()
-                    trieObj.industry[industryName].forEach(fullName => {
-                        let cappedName = fullName.split(' ').map(ele => ele[0].toUpperCase() + ele.slice(1)).join(' ')
-                        innerIndustryNames.push(<button className='search-list-item'>{cappedName}</button>)
-                    })
-                    industryNamesArr.push(
-                        <div className='search-industry-name-container'>
-                            <button className='search-industry-name'
-                                    value={cappedWord}
-                                    >
-                                <div className='bold-frag'>{cappedWord}</div><div>{remainingName}</div>
-                            </button>
-                            <div className='inner-industry-names'>
-                                {innerIndustryNames}
-                            </div>
-                        </div>
-                    )
-                })
-                industryNames = <div className='industry-names-container'>
-                                    <div className='search-term-title'>
-                                        INDUSTRY
-                                    </div>
-                                    <div className='industry-names'>
-                                        {industryNamesArr}
-                                    </div>
-                                </div>
+                industryNames = this.buildIndustriesDropdown(currentNodeI)
             }
         }
         return (
