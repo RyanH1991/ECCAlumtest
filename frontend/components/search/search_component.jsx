@@ -30,7 +30,7 @@ class Search extends React.Component {
                 firstNamesArr.push(
                     <button className='search-list-item'
                          key={`f_${key_i++}`}
-                         value={firstName}
+                         value={`${firstName}+${lastName}`}
                          onClick={this.update('keyWord')}>
                         <div className='bold-frag'>{cappedWord}</div><div>{remainingName}</div>
                         <>&nbsp;</>
@@ -66,7 +66,7 @@ class Search extends React.Component {
                 lastNamesArr.push(
                     <button className='search-list-item'
                             key={`l_${key_i++}`}
-                            value={lastName}
+                            value={`${firstName}+${lastName}`}
                             onClick={this.update('keyWord')}>
                         <div>{firstName[0].toUpperCase() + firstName.slice(1)}</div>
                         <>&nbsp;</>
@@ -100,11 +100,18 @@ class Search extends React.Component {
             let remainingName = industryName.slice(this.state.searchTerm.length)
             let innerIndustryNames = []
             let cappedWord = this.state.searchTerm[0].toUpperCase() + this.state.searchTerm.slice(1).toLowerCase()
+            let firstName, lastName;
             trieObj.industry[industryName].forEach(fullName => {
+                let fullArr = fullName.split(' ')
+                firstName = fullArr[0];
+                lastName = fullArr[1];
                 let cappedName = fullName.split(' ').map(ele => ele[0].toUpperCase() + ele.slice(1)).join(' ')
+                // [firstName, lastName] = fullName.split(' ')
                 innerIndustryNames.push(
                     <button className='search-list-item'
-                            key={`i_${key_i++}`}>
+                            value={`${firstName}+${lastName}+${industryName}`}
+                            key={`i_${key_i++}`}
+                            onClick={this.update('keyWord')}>
                         {cappedName}
                     </button>
                 )
@@ -136,13 +143,20 @@ class Search extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault()
+        console.log(event)
         let search;
         if (this.state.keyWord) {
             search = this.state.keyWord;
         } else {
             search = this.state.searchTerm;
         }
-        this.props.searchUsers(search)
+        // console.log(`keyWord = ${this.state.keyWord}`)
+        // console.log(`searchTerm = ${this.state.searchTerm}`)
+        this.setState({
+            searchTerm: '',
+            keyWord: null
+        })
+        this.props.searchUsers(search.split('+'))
     }
 
     update(field) {
@@ -193,6 +207,7 @@ class Search extends React.Component {
                   className='search-outer-container'>
                 <div className='search-container-title'>Find Alumni</div>
                 <div className='search-middle-container'>
+                    <button className="search-submit">Let's go</button>
                     <div className='search-inner-container'>
                         <input type="text" 
                             className="search-text-box"
@@ -206,7 +221,6 @@ class Search extends React.Component {
                             {industryNames}
                         </div>
                     </div>
-                    <button className="search-submit">Let's go</button>
                 </div>
             </form>
         )

@@ -14,7 +14,9 @@
 
 .search-middle-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    width: 560px;
 }
 
 .search-text-box {

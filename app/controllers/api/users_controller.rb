@@ -22,12 +22,24 @@ class Api::UsersController < ApplicationController
     
     def search
         search = params[:search]
-        @users = User.where('first_name LIKE :search
+        if search.length == 1 #I know I'm looking at a fragment or an industry name
+            search = search[0]
+            @users = User.where('first_name LIKE :search
                             OR last_name LIKE :search
                             OR industry LIKE :search',
                             {search: "#{search}%"})
-        render :index
+        elsif search.length == 2 #I know that I'm looking at a first and last name
+            @users = User.where('first_name = ? 
+                            AND last_name = ?', 
+                            search[0], search[1])
+        else #I know that I'm looking at first, last names and industry
+            @users = User.where('first_name = ?
+                            AND last_name = ?
+                            AND industry = ?',
+                            search[0], search[1], search[2])
+        end
         # debugger
+        render :index
     end
 
     private

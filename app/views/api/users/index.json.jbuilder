@@ -9,6 +9,7 @@
                         :last_name,
                         :phone_numbers,
                         :linkedin_url,
-                        :facebook_url
+                        :facebook_url,
+                        :industry
     end
 end
