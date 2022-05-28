@@ -1,0 +1,2 @@
+class Smallerdatum < ApplicationRecord
+end

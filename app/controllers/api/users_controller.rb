@@ -1,6 +1,8 @@
 class Api::UsersController < ApplicationController
     def index
-        @users = User.all
+        # @users = User.all.order(first_name: :asc)
+        # @users = User.paginate(page: params[:page])
+        @users = User.page(params[:page]).order('first_name')
         render :index
     end
 
@@ -28,22 +30,25 @@ class Api::UsersController < ApplicationController
                             OR last_name LIKE :search
                             OR industry LIKE :search',
                             {search: "#{search}%"})
+                            .order(first_name: :asc)
         elsif search.length == 2 #I know that I'm looking at a first and last name
             @users = User.where('first_name = ? 
                             AND last_name = ?', 
                             search[0], search[1])
+                            .order(first_name: :asc)
         else #I know that I'm looking at first, last names and industry
             @users = User.where('first_name = ?
                             AND last_name = ?
                             AND industry = ?',
                             search[0], search[1], search[2])
+                            .order(first_name: :asc)
         end
         # debugger
         render :index
     end
 
-    private
-    def user_params
-        params.require(:user).permit(:username, :password, :personal_email)
-    end
+    # private
+    # def user_params
+    #     params.require(:user).permit(:username, :password, :personal_email)
+    # end
 end

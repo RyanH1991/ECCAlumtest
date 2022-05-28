@@ -20,8 +20,8 @@ class UserIndex extends React.Component {
     }
 
     render() {
+        // console.log(this.props.users.map(user => user.first_name))
         const users = this.props.users.map(user => {
-            // console.log(user)
             let facebook_url = null;
             if (user.facebook_url) {
                 facebook_url = <a href={"https://" + user.facebook_url}
@@ -31,13 +31,11 @@ class UserIndex extends React.Component {
                     <img src={window.facebookIcon} className="fb-social-icon" alt="" />
                 </a>
             }
-
             let email = null;
-            if (user.personal_email.includes('@')) {
-                email = <button className='email-social-icon'
-                                onClick={this.handleClick}>
+            if (JSON.parse(user.emails).length) {
+                email = <div className='email-social-icon'>
                     <img src={window.emailIcon} className="email-social-icon" alt="" />
-                </button>
+                </div>
             }
 
             let phone_numbers = null;
