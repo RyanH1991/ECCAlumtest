@@ -1,5 +1,6 @@
 import React from 'react';
 import UserIndexContainer from './user/user_index_container';
+import AdminIndexContainer from './admin/admin_index_container'
 import SearchContainer from './search/search_container';
 import SearchPageContainer from './search/search_page_container'
 import { Route, Routes } from 'react-router-dom';
@@ -12,6 +13,7 @@ export default () => (
     </header>
     <Routes>
       <Route exact path='/banana' element={<UserIndexContainer />}/>
+      <Route exact path='/admins' element={<AdminIndexContainer />}/>
       <Route exact path='/search' element={<SearchPageContainer />}/>
     </Routes>
   </div>
