@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { trieFirstNames, trieLastNames, trieIndustries } from '../../util/util_functions';
 
 const trieObj = require('../../util/trieObj.json');
 
-const Search = (props) => {
-    const [searchTerm, setSearchTerm] = useState("");
-    const [keyWord, setKeyWord] = useState(null);
+class Search extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            searchTerm: '',
+            keyWord: null
+        }
 
-    function buildFirstNamesDropdown(currentNodeF) {
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    
+    buildFirstNamesDropdown(currentNodeF) {
         let firstNamesArr = [];
         let words;
         if (currentNodeF.words.length) {
@@ -17,16 +24,14 @@ const Search = (props) => {
         }
         let key_i = 0;
         words.forEach(firstName => {
-            let remainingName = firstName.slice(searchTerm.length)
-            let cappedWord = searchTerm[0].toUpperCase() + searchTerm.slice(1).toLowerCase()
+            let remainingName = firstName.slice(this.state.searchTerm.length)
+            let cappedWord = this.state.searchTerm[0].toUpperCase() + this.state.searchTerm.slice(1).toLowerCase()
             trieObj.first_name[firstName].forEach(lastName => {
                 firstNamesArr.push(
                     <button className='search-list-item'
                          key={`f_${key_i++}`}
                          value={`${firstName}+${lastName}`}
-                         onClick={(e) => {
-                            setKeyWord(e.target.value)
-                        }}>
+                         onClick={this.update('keyWord')}>
                         <div className='bold-frag'>{cappedWord}</div><div>{remainingName}</div>
                         <>&nbsp;</>
                         <div>{lastName[0].toUpperCase() + lastName.slice(1)}</div>
@@ -45,7 +50,7 @@ const Search = (props) => {
                 </div>
     }
 
-    function buildLastNamesDropdown(currentNodeL) {
+    buildLastNamesDropdown(currentNodeL) {
         let lastNamesArr = [];
         let words;
         if (currentNodeL.words.length) {
@@ -55,16 +60,14 @@ const Search = (props) => {
         }
         let key_i = 0
         words.forEach(lastName => {
-            let remainingName = lastName.slice(searchTerm.length)
-            let cappedWord = searchTerm[0].toUpperCase() + searchTerm.slice(1).toLowerCase()
+            let remainingName = lastName.slice(this.state.searchTerm.length)
+            let cappedWord = this.state.searchTerm[0].toUpperCase() + this.state.searchTerm.slice(1).toLowerCase()
             trieObj.last_name[lastName].forEach(firstName => {
                 lastNamesArr.push(
                     <button className='search-list-item'
                             key={`l_${key_i++}`}
                             value={`${firstName}+${lastName}`}
-                            onClick={(e) => {
-                                setKeyWord(e.target.value)
-                            }}>
+                            onClick={this.update('keyWord')}>
                         <div>{firstName[0].toUpperCase() + firstName.slice(1)}</div>
                         <>&nbsp;</>
                         <div className='bold-frag'>{cappedWord}</div><div>{remainingName}</div>
@@ -83,7 +86,7 @@ const Search = (props) => {
                 </div>
     }
 
-    function buildIndustriesDropdown(currentNodeI) {
+    buildIndustriesDropdown(currentNodeI) {
         let industryNamesArr = [];
         let words;
         if (currentNodeI.words.length) {
@@ -94,9 +97,9 @@ const Search = (props) => {
         let key_i = 0;
         let container_key_i = 0;
         words.forEach(industryName => {
-            let remainingName = industryName.slice(searchTerm.length)
+            let remainingName = industryName.slice(this.state.searchTerm.length)
             let innerIndustryNames = []
-            let cappedWord = searchTerm[0].toUpperCase() + searchTerm.slice(1).toLowerCase()
+            let cappedWord = this.state.searchTerm[0].toUpperCase() + this.state.searchTerm.slice(1).toLowerCase()
             let firstName, lastName;
             trieObj.industry[industryName].forEach(fullName => {
                 let fullArr = fullName.split(' ')
@@ -108,9 +111,7 @@ const Search = (props) => {
                     <button className='search-list-item'
                             value={`${firstName}+${lastName}+${industryName}`}
                             key={`i_${key_i++}`}
-                            onClick={(e) => {
-                                setKeyWord(e.target.value)
-                            }}>
+                            onClick={this.update('keyWord')}>
                         {cappedName}
                     </button>
                 )
@@ -120,9 +121,7 @@ const Search = (props) => {
                      key={`cont_i_${container_key_i++}`}>
                     <button className='search-industry-name'
                             value={industryName}
-                            onClick={(e) => {
-                                setKeyWord(e.target.value)
-                            }}>
+                            onClick={this.update('keyWord')}>
                         <div className='bold-frag'>{cappedWord}</div><div>{remainingName}</div>
                     </button>
                     <div className='inner-industry-names'>
@@ -131,7 +130,6 @@ const Search = (props) => {
                 </div>
             )
         })
-
         return  <div className='industry-names-container'
                      key='industry-names-container'>
                     <div className='search-term-title'>
@@ -143,69 +141,80 @@ const Search = (props) => {
                 </div>
     }
 
-    let currentNodeF = trieFirstNames;
-    let currentNodeL = trieLastNames;
-    let currentNodeI = trieIndustries;
-    for (let i = 0; i < searchTerm.length; i++) {
-        let chr = searchTerm[i].toLowerCase();
-        if (currentNodeF && currentNodeF.map[chr]) {
-            currentNodeF = currentNodeF.map[chr]
-        } else {
-            currentNodeF = null;
-        }
-        if (currentNodeL && currentNodeL.map[chr]) {
-            currentNodeL = currentNodeL.map[chr];
-        } else {
-            currentNodeL = null;
-        }
-        if (currentNodeI && currentNodeI.map[chr]) {
-            currentNodeI = currentNodeI.map[chr];
-        } else {
-            currentNodeI = null;
-        }
-    }
-    let firstNames = null;
-    let lastNames = null;
-    let industryNames = null;
-    if (searchTerm) { //I know the user has started typing
-        //I want to style each of the list of words
-        if (currentNodeF) {
-            firstNames = buildFirstNamesDropdown(currentNodeF)
-        }
-        if (currentNodeL) {
-            lastNames = buildLastNamesDropdown(currentNodeL)
-        }
-        if (currentNodeI) {
-            industryNames = buildIndustriesDropdown(currentNodeI)
-        }
-    }
-
-    return  <form onSubmit={(event) => {
-        event.preventDefault();
+    handleSubmit(event) {
+        event.preventDefault()
         let search;
-        if (keyWord) {
-            search = keyWord;
+        if (this.state.keyWord) {
+            search = this.state.keyWord;
         } else {
-            search = searchTerm;
+            search = this.state.searchTerm;
         }
 
-        setKeyWord(null);
-        setSearchTerm('');
+        this.setState({
+            searchTerm: '',
+            keyWord: null
+        })
 
-        props.searchUsers(search.split('+'))
-    }}
+        this.props.searchUsers(search.split('+')).then(res => {
+        })
+    }
+
+    update(field) {
+        return e => this.setState({
+            [field]: e.currentTarget.value
+        })
+    }
+
+    render() {
+        let currentNodeF = trieFirstNames;
+        let currentNodeL = trieLastNames;
+        let currentNodeI = trieIndustries;
+        for (let i = 0; i < this.state.searchTerm.length; i++) {
+            let chr = this.state.searchTerm[i].toLowerCase();
+            if (currentNodeF && currentNodeF.map[chr]) {
+                currentNodeF = currentNodeF.map[chr]
+            } else {
+                currentNodeF = null;
+            }
+            if (currentNodeL && currentNodeL.map[chr]) {
+                currentNodeL = currentNodeL.map[chr];
+            } else {
+                currentNodeL = null;
+            }
+            if (currentNodeI && currentNodeI.map[chr]) {
+                currentNodeI = currentNodeI.map[chr];
+            } else {
+                currentNodeI = null;
+            }
+        }
+        let firstNames = null;
+        let lastNames = null;
+        let industryNames = null;
+        if (this.state.searchTerm) { //I know the user has started typing
+            //I want to style each of the list of words
+            if (currentNodeF) {
+                firstNames = this.buildFirstNamesDropdown(currentNodeF)
+            }
+            if (currentNodeL) {
+                lastNames = this.buildLastNamesDropdown(currentNodeL)
+            }
+            if (currentNodeI) {
+                industryNames = this.buildIndustriesDropdown(currentNodeI)
+            }
+        }
+        return (
+            <form onSubmit={this.handleSubmit}
                   className='search-outer-container'>
                 <div className='search-container-title'>Find Alumni</div>
                 <div className='search-middle-container'>
-                    <button className='search-submit'>Let's Go</button>
+                    <button className="search-submit">Let's go</button>
                     <div className='search-inner-container'>
                         <input type="text" 
-                            className='search-text-box'
-                            value={searchTerm}
-                            onChange={(e) => {
-                                setSearchTerm(e.target.value)
-                            }}
-                            placeholder="First name, Last name, or Industry"/>
+                            className="search-text-box"
+                            value={this.state.searchTerm}
+                            onChange={this.update('searchTerm')}
+                            placeholder="First name, Last name, or Industry"
+                            />
                         <div className='search-dropdown'>
                             {firstNames}
                             {lastNames}
@@ -214,6 +223,8 @@ const Search = (props) => {
                     </div>
                 </div>
             </form>
+        )
+    }
 }
 
 export default Search;

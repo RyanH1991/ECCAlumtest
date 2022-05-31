@@ -32,7 +32,7 @@ function search(str, i, root) {
     return search(str, i+1, root.map[str[i]]);
 }
 
-function fetchWord(currentNode) {
+export const fetchWord = (currentNode) => {
     let nodeCheck = currentNode;
     let word = '';
     while(nodeCheck.parent !== null) {

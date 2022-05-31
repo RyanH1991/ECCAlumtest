@@ -14,7 +14,7 @@ export default () => (
     <Routes>
       <Route exact path='/banana' element={<UserIndexContainer />}/>
       <Route exact path='/admins' element={<AdminIndexContainer />}/>
-      <Route exact path='/search' element={<SearchPageContainer />}/>
+      <Route exact path='/search/:searchTerm' element={<SearchPageContainer />}/>
     </Routes>
   </div>
 );
