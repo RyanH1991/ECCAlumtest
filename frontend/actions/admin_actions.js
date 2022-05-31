@@ -31,7 +31,7 @@ export const fetchAdmin = (adminId) => dispatch => (
         .then(admin => dispatch(receiveAdmin(admin)))
 )
 
-export const searchUsers = (search) => dispatch => (
-    AdminAPIUtil.searchUsers(search)
+export const searchAdmins = (search) => dispatch => (
+    AdminAPIUtil.searchAdmins(search)
         .then(searchResult => dispatch(receiveSearchedAdmins(searchResult)))
 )
