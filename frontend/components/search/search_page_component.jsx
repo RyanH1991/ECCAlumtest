@@ -57,7 +57,7 @@ const SearchPage = (props) => {
                     </div>
     })
 
-    return <div className='user-index-container'>
+    return <div className='search-page-container'>
         { users }
     </div>
 }
