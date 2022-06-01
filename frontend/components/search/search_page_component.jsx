@@ -8,16 +8,30 @@ const SearchPage = (props) => {
         props.searchUsers(searchTerm.split('+'))
     }, [searchTerm])
 
-    const users = props.users.map(user => {
-        console.log(searchTerm)
+    const users = props.users.map((user, idx) => {
         let first_name, last_name
-        if (searchTerm.length === 1) { //I know that I'm looking at a fragment
+        if (searchTerm.split('+').length === 1) { //I know that I'm looking at a fragment
             if (user.first_name.indexOf(searchTerm) === 0) {
-                let remainingFrag = user.first_name.slice(searchTerm.length + 1)
+                let remainingFrag = user.first_name.slice(searchTerm.length)
                 first_name = <div className='name'>
                                 <b>{searchTerm[0].toUpperCase() + searchTerm.slice(1)}</b>
                                 <div>{remainingFrag}</div>
                              </div>
+            } else {
+                first_name = <div className='name'>
+                                {user.first_name[0].toUpperCase() + user.first_name.slice(1)}
+                             </div>
+            }
+            if (user.last_name.indexOf(searchTerm) === 0) {
+                let remainingFrag = user.last_name.slice(searchTerm.length)
+                last_name = <div className='name'>
+                                <b>{searchTerm[0].toUpperCase() + searchTerm.slice(1)}</b>
+                                <div>{remainingFrag}</div>
+                            </div>
+            } else {
+                last_name = <div className='name'>
+                                {user.last_name[0].toUpperCase() + user.last_name.slice(1)}
+                            </div>
             }
         }
         let facebook_url = null;
@@ -42,15 +56,13 @@ const SearchPage = (props) => {
                     <img src={window.phoneIcon} className="phone-social-icon" alt="" />
                 </div>
             }
-            return  <div className='user' key={user.id}>
+            return  <div className='user' key={idx}>
                         <div className='user-icon-container'>
                             <img src={window.userIcon} className="user-icon" alt="" />
                         </div>
                         <div className='full-name'>
                             {first_name}
-                            <div className='name'>
-                                {user.last_name}
-                            </div>
+                            {last_name}
                         </div>
                         <div className='social-icon-container'>
                             <a href={"https://" + user.linkedin_url}

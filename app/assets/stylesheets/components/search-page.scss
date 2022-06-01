@@ -55,6 +55,10 @@
     align-items: center;
 }
 
+.name {
+    display: flex;
+}
+
 .social-icon-container {
     display: flex;
     flex-direction: row;
