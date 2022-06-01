@@ -5,10 +5,10 @@
                         :middle_name,
                         :middle_initial,
                         :last_name,
+                        :industry,
                         :phone_numbers,
                         :emails,
                         :linkedin_url,
-                        :facebook_url,
-                        :industry
+                        :facebook_url
     end
 end

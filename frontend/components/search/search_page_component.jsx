@@ -9,6 +9,17 @@ const SearchPage = (props) => {
     }, [searchTerm])
 
     const users = props.users.map(user => {
+        console.log(searchTerm)
+        let first_name, last_name
+        if (searchTerm.length === 1) { //I know that I'm looking at a fragment
+            if (user.first_name.indexOf(searchTerm) === 0) {
+                let remainingFrag = user.first_name.slice(searchTerm.length + 1)
+                first_name = <div className='name'>
+                                <b>{searchTerm[0].toUpperCase() + searchTerm.slice(1)}</b>
+                                <div>{remainingFrag}</div>
+                             </div>
+            }
+        }
         let facebook_url = null;
             if (user.facebook_url) {
                 facebook_url = <a href={"https://" + user.facebook_url}
@@ -36,9 +47,7 @@ const SearchPage = (props) => {
                             <img src={window.userIcon} className="user-icon" alt="" />
                         </div>
                         <div className='full-name'>
-                            <div className='name'>
-                                {user.first_name}
-                            </div>
+                            {first_name}
                             <div className='name'>
                                 {user.last_name}
                             </div>
