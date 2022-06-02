@@ -52,7 +52,17 @@
 
 .industry-name {
     position: absolute;
+    margin-top: 115px;
+    width: 130px;
+    height: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.industry-name-parts {
     display: flex;
+    position: absolute;
     margin-top: 115px;
     width: 130px;
     height: 14px;

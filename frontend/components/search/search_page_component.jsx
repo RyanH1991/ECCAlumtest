@@ -36,7 +36,7 @@ const SearchPage = (props) => {
             if (user.industry) {
                 if (user.industry.indexOf(searchTerm) === 0) {
                     let remainingFrag = user.industry.slice(searchTerm.length)
-                    industry = <div className='industry-name'>
+                    industry = <div className='industry-name-parts'>
                                     <b>{searchTerm[0].toUpperCase() + searchTerm.slice(1)}</b>
                                     <div className='industry-remaining-frag'>{remainingFrag}</div>
                                 </div>
