@@ -9,7 +9,7 @@ const SearchPage = (props) => {
     }, [searchTerm])
 
     const users = props.users.map((user, idx) => {
-        let first_name, last_name
+        let first_name, last_name, industry
         if (searchTerm.split('+').length === 1) { //I know that I'm looking at a fragment
             if (user.first_name.indexOf(searchTerm) === 0) {
                 let remainingFrag = user.first_name.slice(searchTerm.length)
@@ -32,6 +32,19 @@ const SearchPage = (props) => {
                 last_name = <div className='name'>
                                 {user.last_name[0].toUpperCase() + user.last_name.slice(1)}
                             </div>
+            }
+            if (user.industry) {
+                if (user.industry.indexOf(searchTerm) === 0) {
+                    let remainingFrag = user.industry.slice(searchTerm.length)
+                    industry = <div className='industry-name'>
+                                    <b>{searchTerm[0].toUpperCase() + searchTerm.slice(1)}</b>
+                                    <div className='industry-remaining-frag'>{remainingFrag}</div>
+                                </div>
+                } else {
+                    industry = <div className='industry-name'>
+                                    {user.industry[0].toUpperCase() + user.industry.slice(1)}
+                                </div>
+                }
             }
         }
         let facebook_url = null;
@@ -59,6 +72,7 @@ const SearchPage = (props) => {
             return  <div className='user' key={idx}>
                         <div className='user-icon-container'>
                             <img src={window.userIcon} className="user-icon" alt="" />
+                            {industry}
                         </div>
                         <div className='full-name'>
                             {first_name}

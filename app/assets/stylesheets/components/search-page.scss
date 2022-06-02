@@ -6,6 +6,7 @@
 .user {
     font-family: $montseratt;
     font-weight: 400;
+    font-size: 13px;
     text-decoration: none;
     height: 225px;
     width: 150px;
@@ -45,6 +46,25 @@
     border: 1px solid $gray;
     border-radius: inherit;
     background-color: $lightest-gray;
+
+    position: relative;
+}
+
+.industry-name {
+    position: absolute;
+    display: flex;
+    margin-top: 115px;
+    width: 130px;
+    height: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.industry-remaining-frag {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .full-name {
@@ -53,6 +73,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    width: -webkit-fill-available;
+    padding-left: 10px;
 }
 
 .name {
