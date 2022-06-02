@@ -8,13 +8,14 @@ const SearchPage = (props) => {
         props.searchUsers(searchTerm.split('+'))
     }, [searchTerm])
 
+    // console.log(`searchTerm = ${searchTerm}`)
     const users = props.users.map((user, idx) => {
         let first_name, last_name, industry
         if (searchTerm.split('+').length === 1) { //I know that I'm looking at a fragment
             if (user.first_name.indexOf(searchTerm) === 0) {
                 let remainingFrag = user.first_name.slice(searchTerm.length)
                 first_name = <div className='name'>
-                                <b>{searchTerm[0].toUpperCase() + searchTerm.slice(1)}</b>
+                                <b className='bolded-word'>{searchTerm[0].toUpperCase() + searchTerm.slice(1)}</b>
                                 <div>{remainingFrag}</div>
                              </div>
             } else {
@@ -25,7 +26,7 @@ const SearchPage = (props) => {
             if (user.last_name.indexOf(searchTerm) === 0) {
                 let remainingFrag = user.last_name.slice(searchTerm.length)
                 last_name = <div className='name'>
-                                <b>{searchTerm[0].toUpperCase() + searchTerm.slice(1)}</b>
+                                <b className='bolded-word'>{searchTerm[0].toUpperCase() + searchTerm.slice(1)}</b>
                                 <div>{remainingFrag}</div>
                             </div>
             } else {
@@ -37,7 +38,7 @@ const SearchPage = (props) => {
                 if (user.industry.indexOf(searchTerm) === 0) {
                     let remainingFrag = user.industry.slice(searchTerm.length)
                     industry = <div className='industry-name-parts'>
-                                    <b>{searchTerm[0].toUpperCase() + searchTerm.slice(1)}</b>
+                                    <b className='bolded-word'>{searchTerm[0].toUpperCase() + searchTerm.slice(1)}</b>
                                     <div className='industry-remaining-frag'>{remainingFrag}</div>
                                 </div>
                 } else {
@@ -46,6 +47,14 @@ const SearchPage = (props) => {
                                 </div>
                 }
             }
+        } else {
+            first_name = <div className='name'>{user.first_name[0].toUpperCase() + user.first_name.slice(1)}</div>
+            last_name = <div className='name'>{user.last_name[0].toUpperCase() + user.last_name.slice(1)}</div>
+            let industryName;
+            if (user.industry) {
+                industryName = user.industry[0].toUpperCase() + user.industry.slice(1)
+            }
+            industry = <div className='industry-name'>{industryName}</div>
         }
         let facebook_url = null;
             if (user.facebook_url) {

@@ -22,6 +22,7 @@ const Search = () => {
             let remainingName = firstName.slice(searchTerm.length)
             let cappedWord = searchTerm[0].toUpperCase() + searchTerm.slice(1).toLowerCase()
             trieObj.first_name[firstName].forEach(lastName => {
+                // console.log(`firstName ${firstName} lastName ${lastName}`)
                 firstNamesArr.push(
                     <button className='search-list-item'
                          key={`f_${key_i++}`}
@@ -189,11 +190,10 @@ const Search = () => {
                 } else {
                     search = searchTerm;
                 }
-                // console.log(search)
+                // console.log(`search = ${search}`)
                 setKeyWord(null);
                 setSearchTerm('');
-
-                // props.searchUsers(search.split('+'))
+                
                 navigate(`/search/${search}`)
             }}
                   className='search-outer-container'>
