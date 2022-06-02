@@ -59,8 +59,8 @@ const UserIndex = (props) => {
                     <div className='user-index-item'>{middle_name}</div>
                     <div className='user-index-item'>{last_name}</div>
                     <div className='user-index-item'>{industry}</div>
-                    <div className='user-index-item'>{phone_numbers_div}</div>
-                    <div className='user-index-item'>{emails_div}</div>
+                    <div className='user-index-item-dropdown'>{phone_numbers_div}</div>
+                    <div className='user-index-item-dropdown'>{emails_div}</div>
                     <a href={"https://" + linkedin_url}
                                   className="user-index-item"
                                   target="_blank" 
