@@ -73,7 +73,7 @@ const SearchPage = (props) => {
             }
 
             let phone_numbers = null;
-            if (user.phone_numbers) {
+            if (JSON.parse(user.phone_numbers).length) {
                 phone_numbers = <div className='phone-social-icon'>
                     <img src={window.phoneIcon} className="phone-social-icon" alt="" />
                 </div>

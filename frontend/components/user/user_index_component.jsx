@@ -74,6 +74,16 @@ const UserIndex = (props) => {
 
     return  <div className='user-index-container'>
                 <div className='user-index-inner-container'>
+                    <div className='column-title-container'>
+                        <div className="column-title-item">First Name</div>
+                        <div className="column-title-item">Middle Name</div>
+                        <div className="column-title-item">Last Name</div>
+                        <div className="column-title-item">Industry</div>
+                        <div className="column-title-item">Phone Number</div>
+                        <div className="column-title-item">Email</div>
+                        <div className="column-title-item">LinkedIn</div>
+                        <div className="column-title-item">Facebook</div>
+                    </div>
                     {users}
                 </div>
             </div>
