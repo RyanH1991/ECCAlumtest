@@ -45,8 +45,18 @@ const UserIndex = (props) => {
 
         let emails = JSON.parse(user.emails);
         let emails_div;
+        let dropdownArrow
+        if (emails.length > 1) {
+            dropdownArrow = <img src={window.dropdownArrow} 
+                                alt="|" 
+                                className='drowdown-arrow'/>
+        }
+        console.log(emails)
         if (emails.length) {
-            const defaultOption = emails[0]['address'];
+            const defaultOption = //<div>
+                                    emails[0]['address']
+                                    //{/* {dropdownArrow} */}
+                                //{/* </div>; */}
             emails = emails.map(e => e['address']).slice(1)
             emails_div = <Dropdown options={emails} 
                                           value={defaultOption} 
