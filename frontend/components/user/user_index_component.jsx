@@ -36,27 +36,32 @@ const UserIndex = (props) => {
 
         let phone_numbers = JSON.parse(user.phone_numbers);
         let phone_numbers_div;
+        let dropdownPhoneArrow
+        if (phone_numbers.length > 1) {
+            dropdownPhoneArrow = <img src={window.dropdownIcon} 
+                                alt="|" 
+                                className='drowdown-arrow'/>
+        }
+        console.log(dropdownPhoneArrow)
         if (phone_numbers.length) {
-            const defaultOption = phone_numbers[0];
+            const defaultOption = phone_numbers[0]
             phone_numbers_div = <Dropdown options={phone_numbers.slice(1)} 
                                           value={defaultOption} 
-                                          placeholder="Select an option"/>;
+                                          placeholder="Select an option"
+                                          arrowOpen={dropdownPhoneArrow}
+                                          arrowClosed={dropdownPhoneArrow}/>;
         }
 
         let emails = JSON.parse(user.emails);
         let emails_div;
-        let dropdownArrow
+        let dropdownEmailArrow
         if (emails.length > 1) {
-            dropdownArrow = <img src={window.dropdownArrow} 
+            dropdownEmailArrow = <img src={window.dropdownArrow} 
                                 alt="|" 
                                 className='drowdown-arrow'/>
         }
-        console.log(emails)
         if (emails.length) {
-            const defaultOption = //<div>
-                                    emails[0]['address']
-                                    //{/* {dropdownArrow} */}
-                                //{/* </div>; */}
+            const defaultOption = emails[0]['address']
             emails = emails.map(e => e['address']).slice(1)
             emails_div = <Dropdown options={emails} 
                                           value={defaultOption} 
