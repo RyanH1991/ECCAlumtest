@@ -5,7 +5,7 @@ const UserIndex = (props) => {
 
     useEffect(() => {
         props.fetchUsers()
-    }, [])
+    }, []);
 
     const users = props.users.map((user, idx) => {
         let first_name, middle_name, last_name, industry;
